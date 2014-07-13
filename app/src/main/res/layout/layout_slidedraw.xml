@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:my="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="200dip"
+            android:layout_height="50dip"
+            android:text="上面的Title"
+            android:gravity="center"
+            android:background="@drawable/abc_ic_go"/>
+
+    <com.virgil.androidfunctiontest.widget.Panel
+            android:id="@+id/mySliding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            my:handle="@+id/drag_me"
+            my:content="@+id/scroll_1"
+            my:position="top"
+            my:animationDuration="1000"
+            my:linearFlying="true"
+            my:openedHandle="@drawable/top_switcher_expanded_background"
+            my:closedHandle="@drawable/top_switcher_collapsed_background">
+
+        <ScrollView
+                android:id="@+id/scroll_1"
+                android:layout_width="wrap_content"
+                android:layout_height="200dip">
+
+            <LinearLayout
+                    android:id="@+id/myconten"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/drag_me"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/drag_me1"
+                android:layout_width="200dip"
+                android:layout_height="50dip"
+                android:text="点我拖动"
+                android:gravity="center"/>
+        <Button
+                android:id="@+id/button_slide11"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:text="懂1"/>
+
+        <Button
+                android:id="@+id/button_slide21"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:text="懂2"/>
+        </LinearLayout>
+
+    </com.virgil.androidfunctiontest.widget.Panel>
+
+
+    <ScrollView
+            android:id="@+id/second_scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+            <Button
+                    android:id="@+id/button_slide1"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow1"/>
+
+            <Button
+                    android:id="@+id/button_slide2"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow2"/>
+
+            <Button
+                    android:id="@+id/button_slide3"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow3"/>
+
+            <Button
+                    android:id="@+id/button_slide4"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow4"/>
+
+            <Button
+                    android:id="@+id/button_slide5"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow5"/>
+
+            <Button
+                    android:id="@+id/button_slide6"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow6"/>
+
+            <Button
+                    android:id="@+id/button_slide7"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow7"/>
+
+            <Button
+                    android:id="@+id/button_slide8"
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="justToShow8"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

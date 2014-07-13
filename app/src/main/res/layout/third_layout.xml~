@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp">
+
+    <FrameLayout
+        android:id="@+id/fragment_to_replace"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"></FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_weight="0">
+        <Button
+            android:id="@+id/stack_button_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+<<<<<<< HEAD
+            android:text="Fg1"/>
+=======
+            android:text="1"/>
+>>>>>>> f9b531ff31546b2bc56880e25c6bf776a2e9a483
+        <Button
+            android:id="@+id/stack_button_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+<<<<<<< HEAD
+            android:text="Fg2"/>
+=======
+            android:text="2"/>
+>>>>>>> f9b531ff31546b2bc56880e25c6bf776a2e9a483
+        <Button
+            android:id="@+id/stack_button_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+<<<<<<< HEAD
+            android:text="Fg3"/>
+=======
+            android:text="3"/>
+>>>>>>> f9b531ff31546b2bc56880e25c6bf776a2e9a483
+        </LinearLayout>
+</LinearLayout>

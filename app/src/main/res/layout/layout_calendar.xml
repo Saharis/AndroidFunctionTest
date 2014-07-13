@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+    <TextView
+            android:layout_width="200dip"
+            android:layout_height="50dip"
+            android:text="上面的Title"
+            android:gravity="center"
+            android:background="@drawable/abc_ic_go"/>
+
+    <com.virgil.androidfunctiontest.widget.InnerScrollView
+            android:id="@+id/scroll_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:gravity="center">
+            <com.virgil.androidfunctiontest.widget.InnerScrollView
+                    android:id="@+id/scroll_son2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dip"
+                    android:scrollbars="none">
+
+            <LinearLayout
+                    android:id="@+id/drag_me"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                <Button
+                        android:id="@+id/button_a1"
+                        android:layout_width="200dip"
+                        android:layout_height="wrap_content"
+                        android:text="带隐藏1"/>
+
+                <Button
+                        android:id="@+id/button_a2"
+                        android:layout_width="200dip"
+                        android:layout_height="wrap_content"
+                        android:text="带隐藏2"/>
+                <Button
+                        android:id="@+id/button_a3"
+                        android:layout_width="200dip"
+                        android:layout_height="wrap_content"
+                        android:text="带隐藏3"/>
+                <Button
+                        android:id="@+id/button_a4"
+                        android:layout_width="200dip"
+                        android:layout_height="wrap_content"
+                        android:text="带隐藏4"/>
+                <Button
+                        android:id="@+id/button_a5"
+                        android:layout_width="200dip"
+                        android:layout_height="wrap_content"
+                        android:text="带隐藏5"/>
+                <Button
+                        android:id="@+id/button_a6"
+                        android:layout_width="200dip"
+                        android:layout_height="wrap_content"
+                        android:text="带隐藏6"/>
+            </LinearLayout>
+</com.virgil.androidfunctiontest.widget.InnerScrollView>
+
+
+            <TextView
+                    android:id="@+id/drag_me1"
+                    android:layout_width="200dip"
+                    android:layout_height="50dip"
+                    android:text="点我拖动"
+                    android:gravity="center"/>
+
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                    <Button
+                            android:id="@+id/button_slide1"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow1"/>
+
+                    <Button
+                            android:id="@+id/button_slide2"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow2"/>
+
+                    <Button
+                            android:id="@+id/button_slide3"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow3"/>
+
+                    <Button
+                            android:id="@+id/button_slide4"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow4"/>
+
+                    <Button
+                            android:id="@+id/button_slide5"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow5"/>
+
+                    <Button
+                            android:id="@+id/button_slide6"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow6"/>
+
+                    <Button
+                            android:id="@+id/button_slide7"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow7"/>
+
+                    <Button
+                            android:id="@+id/button_slide8"
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:text="justToShow8"/>
+
+                </LinearLayout>
+
+        </LinearLayout>
+    </com.virgil.androidfunctiontest.widget.InnerScrollView>
+</LinearLayout>
