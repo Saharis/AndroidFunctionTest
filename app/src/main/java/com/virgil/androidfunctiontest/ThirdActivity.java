@@ -35,7 +35,9 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
         bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Calender>(this,"Calendar",Fragment_Calender.class)).setText("Calendar"));
         bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment1>(this,"Fragment1",Fragment1.class)).setText("Fragment1"));
         bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_SlideDrawer>(this,"Fragment_SlideDrawer",Fragment_SlideDrawer.class)).setText("Fragment_SlideDrawer"));
-
+        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment2>(this,"Fragment2",Fragment2.class)).setText("Fragment2"));
+        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Dialog>(this,"Fragment_Dialog",Fragment_Dialog.class)).setText("Fragment_Dialog"));
+        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment3>(this,"Fragment3",Fragment3.class)).setText("Fragment3"));
 
 //        this.findViewById(R.id.stack_button_1).setOnClickListener(this);
 //        this.findViewById(R.id.stack_button_2).setOnClickListener(this);
@@ -66,13 +68,13 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
                 jumpToFragment(fragment_calender, "calender");
                 break;
             case R.id.stack_button_3:
-                Fragment_Dialog dialogFragment=new Fragment_Dialog();
-                dialogFragment.setContent_text("第一次测试");
-                FragmentTransaction ft=getFragmentManager().beginTransaction();
-                ft.add(R.id.fragment_to_replace,dialogFragment);
-
-                ft.commit();
-                dialogFragment.show(getFragmentManager(),"dialog");
+//                Fragment_Dialog dialogFragment=new Fragment_Dialog();
+//                dialogFragment.setContent_text("第一次测试");
+//                FragmentTransaction ft=getFragmentManager().beginTransaction();
+//                ft.add(R.id.fragment_to_replace,dialogFragment);
+//
+//                ft.commit();
+//                dialogFragment.show(getFragmentManager(),"dialog");
                 break;
         }
     }

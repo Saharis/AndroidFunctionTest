@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:id="@+id/smooth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <Button
+            android:id="@+id/button2"
+            android:layout_width="200dip"
+            android:layout_height="60dip"
+            android:layout_below="@+id/button1"
+            android:background="@color/brown"
+            android:text="button2"/>
+    <Button
+            android:id="@+id/button3"
+            android:layout_width="200dip"
+            android:layout_height="60dip"
+            android:layout_below="@+id/button2"
+            android:background="@color/white"
+            android:text="button3"/>
+
+    <Button
+            android:id="@+id/button1"
+            android:layout_width="200dip"
+            android:layout_height="60dip"
+            android:background="@color/home_myctrip"
+            android:text="button1"/>
+</RelativeLayout>

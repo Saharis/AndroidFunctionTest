@@ -13,4 +13,8 @@ public class DensityUtil {
         int dpi_value = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sp, ApplicationCache.getApplication().getResources().getDisplayMetrics());
         return dpi_value;
     }
+    public static int SPToPX(float sp) {
+        int dpi_value = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, sp, ApplicationCache.getApplication().getResources().getDisplayMetrics());
+        return dpi_value;
+    }
 }

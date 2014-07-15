@@ -24,52 +24,22 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:gravity="center">
+
             <com.virgil.androidfunctiontest.widget.InnerScrollView
                     android:id="@+id/scroll_son2"
                     android:layout_width="match_parent"
-                    android:layout_height="200dip"
+                    android:layout_height="wrap_content"
                     android:scrollbars="none">
 
-            <LinearLayout
-                    android:id="@+id/drag_me"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                        android:id="@+id/drag_me"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="200dip">
 
-                <Button
-                        android:id="@+id/button_a1"
-                        android:layout_width="200dip"
-                        android:layout_height="wrap_content"
-                        android:text="带隐藏1"/>
-
-                <Button
-                        android:id="@+id/button_a2"
-                        android:layout_width="200dip"
-                        android:layout_height="wrap_content"
-                        android:text="带隐藏2"/>
-                <Button
-                        android:id="@+id/button_a3"
-                        android:layout_width="200dip"
-                        android:layout_height="wrap_content"
-                        android:text="带隐藏3"/>
-                <Button
-                        android:id="@+id/button_a4"
-                        android:layout_width="200dip"
-                        android:layout_height="wrap_content"
-                        android:text="带隐藏4"/>
-                <Button
-                        android:id="@+id/button_a5"
-                        android:layout_width="200dip"
-                        android:layout_height="wrap_content"
-                        android:text="带隐藏5"/>
-                <Button
-                        android:id="@+id/button_a6"
-                        android:layout_width="200dip"
-                        android:layout_height="wrap_content"
-                        android:text="带隐藏6"/>
-            </LinearLayout>
-</com.virgil.androidfunctiontest.widget.InnerScrollView>
+                </LinearLayout>
+            </com.virgil.androidfunctiontest.widget.InnerScrollView>
 
 
             <TextView
@@ -79,6 +49,11 @@
                     android:text="点我拖动"
                     android:gravity="center"/>
 
+            <com.virgil.androidfunctiontest.widget.InnerScrollView
+                    android:id="@+id/scroll_son1"
+                    android:layout_width="match_parent"
+                    android:layout_height="700dip"
+                    android:scrollbars="none">
 
                 <LinearLayout
                         android:orientation="vertical"
@@ -135,7 +110,7 @@
                             android:text="justToShow8"/>
 
                 </LinearLayout>
-
+            </com.virgil.androidfunctiontest.widget.InnerScrollView>
         </LinearLayout>
     </com.virgil.androidfunctiontest.widget.InnerScrollView>
 </LinearLayout>

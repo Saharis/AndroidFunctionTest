@@ -16,15 +16,15 @@ public class NetWorkReceiver extends BroadcastReceiver{
         ConnectivityManager connectivityManager=(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo acNetworkInfo=connectivityManager.getActiveNetworkInfo();
         NetworkInfo mobileNetworkInfo=connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if(acNetworkInfo!=null){
-            Toast.makeText(context,"活动网络类型为："+acNetworkInfo.getTypeName(),Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(context,"没有检测到活动网络链接",Toast.LENGTH_LONG).show();
-        }
-        if(mobileNetworkInfo!=null){
-            Toast.makeText(context,"移动网络类型为："+mobileNetworkInfo.getTypeName(),Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(context,"没有检测到移动网络链接",Toast.LENGTH_LONG).show();
-        }
+//        if(acNetworkInfo!=null){
+//            Toast.makeText(context,"活动网络类型为："+acNetworkInfo.getTypeName(),Toast.LENGTH_LONG).show();
+//        }else{
+//            Toast.makeText(context,"没有检测到活动网络链接",Toast.LENGTH_LONG).show();
+//        }
+//        if(mobileNetworkInfo!=null){
+//            Toast.makeText(context,"移动网络类型为："+mobileNetworkInfo.getTypeName(),Toast.LENGTH_LONG).show();
+//        }else{
+//            Toast.makeText(context,"没有检测到移动网络链接",Toast.LENGTH_LONG).show();
+//        }
     }
 }
