@@ -6,25 +6,96 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <Button
-            android:id="@+id/button2"
-            android:layout_width="200dip"
-            android:layout_height="60dip"
-            android:layout_below="@+id/button1"
-            android:background="@color/brown"
-            android:text="button2"/>
-    <Button
-            android:id="@+id/button3"
-            android:layout_width="200dip"
-            android:layout_height="60dip"
-            android:layout_below="@+id/button2"
-            android:background="@color/white"
-            android:text="button3"/>
+    <RelativeLayout
+            android:id="@+id/sad"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-            android:id="@+id/button1"
-            android:layout_width="200dip"
-            android:layout_height="60dip"
-            android:background="@color/home_myctrip"
-            android:text="button1"/>
+        <Button
+                android:id="@+id/button2"
+                android:layout_width="200dip"
+                android:layout_height="60dip"
+                android:layout_below="@+id/button1"
+                android:background="@color/brown"
+                android:visibility="gone"
+                android:text="button2"/>
+
+        <Button
+                android:id="@+id/button3"
+                android:layout_width="200dip"
+                android:layout_height="60dip"
+                android:layout_below="@+id/button2"
+                android:background="@color/white"
+                android:text="button3"/>
+
+        <Button
+                android:id="@+id/button1"
+                android:layout_width="200dip"
+                android:layout_height="60dip"
+                android:background="@color/home_myctrip"
+                android:text="button1"/>
+    </RelativeLayout>
+    <com.virgil.androidfunctiontest.widget.CustomScrollView
+            android:id="@+id/custom_scrollview"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sad"
+            android:layout_width="wrap_content">
+
+            <LinearLayout
+                    android:layout_below="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <Button
+                        android:id="@+id/button01"
+                        android:layout_width="200dip"
+                        android:layout_height="60dip"
+                        android:background="@color/home_myctrip"
+                        android:text="a"/>
+                <Button
+                        android:id="@+id/button02"
+                        android:layout_width="200dip"
+                        android:layout_height="60dip"
+                        android:background="@color/home_myctrip"
+                        android:text="b"/>
+                <Button
+                        android:id="@+id/button03"
+                        android:layout_width="200dip"
+                        android:layout_height="60dip"
+                        android:background="@color/home_myctrip"
+                        android:text="a"/>
+                <Button
+                        android:id="@+id/button04"
+                        android:layout_width="200dip"
+                        android:layout_height="60dip"
+                        android:background="@color/home_myctrip"
+                        android:text="a"/>
+                <Button
+                        android:id="@+id/button05"
+                        android:layout_width="200dip"
+                        android:layout_height="60dip"
+                        android:background="@color/home_myctrip"
+                        android:text="a"/>
+                <Button
+                        android:id="@+id/button06"
+                        android:layout_width="200dip"
+                        android:layout_height="60dip"
+                        android:background="@color/home_myctrip"
+                        android:text="a"/>
+                <Button
+                        android:id="@+id/button07"
+                        android:layout_width="200dip"
+                        android:layout_height="60dip"
+                        android:background="@color/home_myctrip"
+                        android:text="a"/> <Button
+                    android:id="@+id/button08"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="a"/>
+
+                    </LinearLayout>
+
+    </com.virgil.androidfunctiontest.widget.CustomScrollView>
 </RelativeLayout>

@@ -6,33 +6,34 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import com.virgil.androidfunctiontest.framework.BasicFragment;
-import com.virgil.androidfunctiontest.widget.BounceInterpolator;
 import com.virgil.androidfunctiontest.widget.CreatView;
-import com.virgil.androidfunctiontest.widget.CustomScrollView;
 import com.virgil.androidfunctiontest.widget.Panel;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 /**
  * Created by Virgil on 2014/7/9.
  */
-public class Fragment_SlideDrawer extends BasicFragment implements Panel.OnPanelListener{
+public class Fragment_SlideDrawer extends BasicFragment implements Panel.OnPanelListener {
+    public static final String Tag = "CreatView";
+    int lastY = 0;
+    float[] location;
     private ScrollView scroll1;
     private TextView dragme;
     private CreatView mCreatView;
-    int lastY = 0;
-    float[] location;
     private WindowManager wvm;
     private ViewGroup.LayoutParams layoutParams_drag;
     private LinearLayout.LayoutParams layoutParams_scroll1;
-    public static final String Tag = "CreatView";
     private Context mContext;
     private Rect rc;
     private LinearLayout.LayoutParams layoutParams;
     private Panel topPanel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_slidedraw, null);
@@ -43,7 +44,7 @@ public class Fragment_SlideDrawer extends BasicFragment implements Panel.OnPanel
         location = new float[2];
         wvm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         Panel panel;
-        ScrollView second_scroll=(ScrollView)view.findViewById(R.id.second_scroll);
+        ScrollView second_scroll = (ScrollView) view.findViewById(R.id.second_scroll);
 //        topPanel = panel = (Panel) view.findViewById(R.id.mySliding);
 //        panel.setOnPanelListener(this);
 //        panel.setInterpolator(new BounceInterpolator(BounceInterpolator.Type.OUT));
@@ -66,10 +67,10 @@ public class Fragment_SlideDrawer extends BasicFragment implements Panel.OnPanel
             }
         });
 
-        LinearLayout linearLayout=(LinearLayout)view.findViewById(R.id.myconten);
-        final ArrayList<Button> buttonList=new ArrayList<Button>();
-        while (buttonList.size()<6){
-            Button button=new Button(getActivity());
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.myconten);
+        final ArrayList<Button> buttonList = new ArrayList<Button>();
+        while (buttonList.size() < 6) {
+            Button button = new Button(getActivity());
             buttonList.add(button);
             button.setWidth(200);
             button.setHeight(80);
@@ -80,11 +81,13 @@ public class Fragment_SlideDrawer extends BasicFragment implements Panel.OnPanel
 //        getActivity().onKeyDown()
         return view;
     }
+
     public void onPanelClosed(Panel panel) {
         String panelName = getResources().getResourceEntryName(panel.getId());
         Log.d("TestPanels", "Panel [" + panelName + "] closed");
     }
-//    @Override
+
+    //    @Override
 //    public boolean onKeyDown(int keyCode, KeyEvent event) {
 //        if (keyCode == KeyEvent.KEYCODE_T) {
 //            topPanel.setOpen(!topPanel.isOpen(), false);
@@ -96,6 +99,7 @@ public class Fragment_SlideDrawer extends BasicFragment implements Panel.OnPanel
         String panelName = getResources().getResourceEntryName(panel.getId());
         Log.d("TestPanels", "Panel [" + panelName + "] opened");
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -158,7 +162,7 @@ public class Fragment_SlideDrawer extends BasicFragment implements Panel.OnPanel
                     lastY = (int) event.getRawY();
                     dragme.setX(location[0]);
                     dragme.setY(event.getYPrecision());
-                    layoutParams_drag=dragme.getLayoutParams();
+                    layoutParams_drag = dragme.getLayoutParams();
 //                    layoutParams_drag.height;
                     dragme.setLayoutParams(layoutParams_drag);
 //                    dragme.setLayoutParams(wlp);
