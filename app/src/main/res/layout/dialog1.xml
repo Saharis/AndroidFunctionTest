@@ -1,101 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:id="@+id/smooth"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:padding="20dip"
+        android:gravity="center">
 
-    <RelativeLayout
+    <Button
+            android:id="@+id/button1"
+            android:layout_width="200dip"
+            android:layout_height="60dip"
+            android:background="@drawable/all_oval_angle_shape"
+            android:text="button1"/>
+    <LinearLayout
             android:id="@+id/sad"
             android:orientation="vertical"
             android:layout_width="match_parent"
+            android:background="@drawable/all_oval_angle_shape_normal"
+            android:padding="10dip"
             android:layout_height="wrap_content">
 
-        <Button
+
+        <LinearLayout
                 android:id="@+id/button2"
-                android:layout_width="200dip"
-                android:layout_height="60dip"
-                android:layout_below="@+id/button1"
-                android:background="@color/brown"
-                android:visibility="gone"
-                android:text="button2"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
 
-        <Button
+            <Button
+                    android:id="@+id/button_add6"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:background="@color/brown"
+                    android:visibility="visible"
+                    android:text="button_add6"/>
+            <Button
+                    android:id="@+id/button_add7"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:background="@color/brown"
+                    android:visibility="visible"
+                    android:text="button_add7"/>
+        </LinearLayout>
+        -->
+        <!-- <Button
+                 android:id="@+id/button3"
+                 android:layout_width="200dip"
+                 android:layout_height="60dip"
+                 android:layout_below="@+id/button2"
+                 android:background="@color/white"
+                 android:text="button3"/>-->
+
+        <LinearLayout
                 android:id="@+id/button3"
-                android:layout_width="200dip"
-                android:layout_height="60dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/all_oval_angle_shape_normal"
+                android:padding="10dip"
                 android:layout_below="@+id/button2"
-                android:background="@color/white"
-                android:text="button3"/>
+                >
 
-        <Button
-                android:id="@+id/button1"
-                android:layout_width="200dip"
-                android:layout_height="60dip"
-                android:background="@color/home_myctrip"
-                android:text="button1"/>
-    </RelativeLayout>
+            <Button
+                    android:id="@+id/button_add1"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:background="@color/gray"
+                    android:visibility="visible"
+                    android:text="button_add1"/>
+
+            <Button
+                    android:id="@+id/button_add2"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:background="@color/gray"
+                    android:visibility="visible"
+                    android:text="button_add2"/>
+
+            <Button
+                    android:id="@+id/button_add3"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:background="@color/gray"
+                    android:visibility="visible"
+                    android:text="button_add3"/>
+            <Button
+                    android:id="@+id/button_add4"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:background="@color/gray"
+                    android:visibility="visible"
+                    android:text="button_add4"/>
+
+            <Button
+                    android:id="@+id/button_add5"
+                    android:layout_width="200dip"
+                    android:layout_height="40dip"
+                    android:background="@color/gray"
+                    android:visibility="visible"
+                    android:text="button_add5"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
     <com.virgil.androidfunctiontest.widget.CustomScrollView
             android:id="@+id/custom_scrollview"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sad"
-            android:layout_width="wrap_content">
+            android:layout_width="match_parent">
 
-            <LinearLayout
-                    android:layout_below="@+id/button3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                <Button
-                        android:id="@+id/button01"
-                        android:layout_width="200dip"
-                        android:layout_height="60dip"
-                        android:background="@color/home_myctrip"
-                        android:text="a"/>
-                <Button
-                        android:id="@+id/button02"
-                        android:layout_width="200dip"
-                        android:layout_height="60dip"
-                        android:background="@color/home_myctrip"
-                        android:text="b"/>
-                <Button
-                        android:id="@+id/button03"
-                        android:layout_width="200dip"
-                        android:layout_height="60dip"
-                        android:background="@color/home_myctrip"
-                        android:text="a"/>
-                <Button
-                        android:id="@+id/button04"
-                        android:layout_width="200dip"
-                        android:layout_height="60dip"
-                        android:background="@color/home_myctrip"
-                        android:text="a"/>
-                <Button
-                        android:id="@+id/button05"
-                        android:layout_width="200dip"
-                        android:layout_height="60dip"
-                        android:background="@color/home_myctrip"
-                        android:text="a"/>
-                <Button
-                        android:id="@+id/button06"
-                        android:layout_width="200dip"
-                        android:layout_height="60dip"
-                        android:background="@color/home_myctrip"
-                        android:text="a"/>
-                <Button
-                        android:id="@+id/button07"
-                        android:layout_width="200dip"
-                        android:layout_height="60dip"
-                        android:background="@color/home_myctrip"
-                        android:text="a"/> <Button
+        <LinearLayout
+                android:layout_below="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <Button
+                    android:id="@+id/button01"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="a"/>
+
+            <Button
+                    android:id="@+id/button02"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="b"/>
+
+            <Button
+                    android:id="@+id/button03"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="a"/>
+
+            <Button
+                    android:id="@+id/button04"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="a"/>
+
+            <Button
+                    android:id="@+id/button05"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="a"/>
+
+            <Button
+                    android:id="@+id/button06"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="a"/>
+
+            <Button
+                    android:id="@+id/button07"
+                    android:layout_width="200dip"
+                    android:layout_height="60dip"
+                    android:background="@color/home_myctrip"
+                    android:text="a"/>
+
+            <Button
                     android:id="@+id/button08"
                     android:layout_width="200dip"
                     android:layout_height="60dip"
                     android:background="@color/home_myctrip"
                     android:text="a"/>
 
-                    </LinearLayout>
+        </LinearLayout>
 
     </com.virgil.androidfunctiontest.widget.CustomScrollView>
-</RelativeLayout>
+</LinearLayout>

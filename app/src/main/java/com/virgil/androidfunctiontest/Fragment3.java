@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import com.virgil.androidfunctiontest.framework.BasicFragment;
 
 /**
@@ -17,6 +20,26 @@ public class Fragment3 extends BasicFragment implements View.OnTouchListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment3, null);
+        final Button button1=(Button)view.findViewById(R.id.button_test1);
+        final Button button2=(Button)view.findViewById(R.id.button_test2);
+        Button button3=(Button)view.findViewById(R.id.button_test3);
+
+        final RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) button2.getLayoutParams();
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lp.topMargin+=5;
+                button2.setLayoutParams(lp);
+            }
+        });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lp.topMargin+=-5;
+                button2.setLayoutParams(lp);
+            }
+        });
         view.setOnTouchListener(this);
         return view;
     }

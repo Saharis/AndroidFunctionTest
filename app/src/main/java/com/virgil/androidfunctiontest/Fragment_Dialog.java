@@ -17,82 +17,130 @@ public class Fragment_Dialog extends BasicFragment implements GestureDetector.On
     final String TAG = "检查触摸的坐标";
     int scrollDistance=0;
     private GestureDetector mGestureDetector;
-    private RelativeLayout.LayoutParams lp;
-    private Button button2;
+    private LinearLayout.LayoutParams lp;
+    private View button2;
+    private  View button1;
+    private LinearLayout button3;
     private int mTopMargin;
     private boolean isScrolling;
+    private int height_content;
+    private int height_handle;
+    private LinearLayout.LayoutParams lp_handle;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog1, container, false);
-        Button button1 = (Button) view.findViewById(R.id.button1);
-        Button button3 = (Button) view.findViewById(R.id.button3);
-        button2 = (Button) view.findViewById(R.id.button2);
-        lp = (RelativeLayout.LayoutParams) button2.getLayoutParams();
+         button1 = (View) view.findViewById(R.id.button1);
+        button3 = (LinearLayout) view.findViewById(R.id.button3);
+        button2 = (View) view.findViewById(R.id.button2);
+        button3.setClickable(true);
+        button3.setFocusable(true);
+        lp = (LinearLayout.LayoutParams) button2.getLayoutParams();
         mGestureDetector = new GestureDetector(getActivity(),this);
         mGestureDetector.setIsLongpressEnabled(false);
-        lp.addRule(RelativeLayout.BELOW, R.id.button1);
+//        lp.addRule(RelativeLayout.BELOW, R.id.button1);
+        lp_handle=(LinearLayout.LayoutParams)button3.getLayoutParams();
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lp.topMargin += -10;
+                lp.topMargin += -1;
+                Log.e(TAG, "当前lp.topMargin" + lp.topMargin);
+                Log.e(TAG, "当前lp_handle.topMargin" + lp_handle.topMargin);
                 button2.setLayoutParams(lp);
             }
         });
-        button2.setOnClickListener(new View.OnClickListener() {
+        Button button01=(Button)view.findViewById(R.id.button01);
+        button01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lp.topMargin += 10;
+                lp.topMargin += 1;
+                Log.e(TAG, "当前lp.topMargin" + lp.topMargin);
+                Log.e(TAG, "当前lp_handle.topMargin" + lp_handle.topMargin);
                 button2.setLayoutParams(lp);
             }
         });
         CustomScrollView custom_scrollvie=(CustomScrollView)view.findViewById(R.id.custom_scrollview);
         custom_scrollvie.sonGesture=mGestureDetector;
+
         button3.setOnTouchListener(touchListener);
         return view;
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        button2.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                button2.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                height_content =button2.getHeight();
+                Log.e(TAG, "onStart：button2.getHeight()是：" + button2.getHeight());
+                Log.e(TAG, "onStart：执行时间是：" + System.currentTimeMillis());
+            }
+        });
+        button3.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                button3.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                height_handle =button3.getHeight();
+                Log.e(TAG, "onStart：button3.getHeight()是：" + button3.getHeight());
+                Log.e(TAG, "onStart：执行时间是：" + System.currentTimeMillis());
+            }
+        });
+        button1.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                button1.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                Log.e(TAG, "onStart：button1.getHeight()是：" + button1.getHeight());
+                Log.e(TAG, "onStart：执行时间是：" + System.currentTimeMillis());
+            }
+        });
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-        mTopMargin=button2.getHeight()-30;
-        Log.e(TAG, "Button2的Height是："+button2.getHeight()+"mTOPmargin是："+mTopMargin);
+        int temp= height_content - height_handle;
+        if(temp>0){
+            mTopMargin=temp;
+        }else{
+            mTopMargin= height_content;
+        }
+        mTopMargin=500;
+        lp.topMargin=-142;
+        button2.setLayoutParams(lp);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mTopMargin=button2.getHeight()-30;
-        Log.e(TAG, "Button2的Height是："+button2.getHeight()+"mTOPmargin是："+mTopMargin);
+        Log.e(TAG, "OnResume:button2.getHeight()是："+button2.getHeight()+"mTOPmargin是："+mTopMargin);
     }
+
 
     private View.OnTouchListener touchListener=new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if(event.getAction()==MotionEvent.ACTION_UP && //onScroll时的ACTION_UP
-                    isScrolling==true)
-            {
-//                if(lp.topMargin<=-mTopMargin&&lp.topMargin>=mTopMargin){
-//                    if (lp.topMargin >= (-mTopMargin/2)) {//往左超过一半
+//            if(event.getAction()==MotionEvent.ACTION_UP && //onScroll时的ACTION_UP
+//                    isScrolling==true)
+//            {
+//                if (scrollDistance<0) {//往下超过一半
+//                    new AsynMove().execute(new Integer[] { -10 });// 正数展开
+//                }
+//                else if (scrollDistance>0) {//往右拖拉
+//                    new AsynMove().execute(new Integer[] { 10 });// 往上收缩
+//                }else if(scrollDistance==0){
+//                    if (lp.topMargin >= (-mTopMargin/2)) {//往下超过一半
 //                        new AsynMove().execute(new Integer[] { -10 });// 正数展开
-//                    }
-//                    else if (lp.topMargin < (-mTopMargin/2)) {//往右拖拉
-//                        new AsynMove().execute(new Integer[] { 10 });// 负数收缩
-//                    }
-//                }else{
-//                    if(lp.topMargin<=-mTopMargin){
-//                        new AsynMove().execute(new Integer[] { 10 });// 负数收缩
+//                    }else
+//                    if(lp.topMargin < (-mTopMargin/2)){
+//                        new AsynMove().execute(new Integer[] { 10 });// 往上收缩
 //                    }
 //                }
-                if (lp.topMargin >= (-mTopMargin/2)) {//往左超过一半
-                    new AsynMove().execute(new Integer[] { -10 });// 正数展开
-                }
-                else if (lp.topMargin < (-mTopMargin/2)) {//往右拖拉
-                    new AsynMove().execute(new Integer[] { 10 });// 负数收缩
-                }
-            }
+//            }
 //            else if(event.getAction()==MotionEvent.ACTION_UP&&!isScrolling){
-//                if(lp.topMargin==mTopMargin){
+//                if(lp.topMargin==0){
 //                    new AsynMove().execute(new Integer[] {10});// 正数展开
 //                }else  if(lp.topMargin==-mTopMargin){
 //                    new AsynMove().execute(new Integer[] {-10});// 正数展开
@@ -136,10 +184,10 @@ public class Fragment_Dialog extends BasicFragment implements GestureDetector.On
         @Override
         protected void onProgressUpdate(Integer... params) {
             if (params[0] < 0)
-                lp.topMargin = Math.max(lp.topMargin + params[0],
-                        (-mTopMargin));
+                lp.topMargin = Math.min(lp.topMargin - params[0],0
+                        );
             else
-                lp.topMargin = Math.max(lp.topMargin + params[0], 0);
+                lp.topMargin = Math.max(lp.topMargin - params[0], (-mTopMargin));
 //            if(lp.topMargin<=mTopMargin&&lp.topMargin>=-mTopMargin){
                 button2.setLayoutParams(lp);
 //            }
@@ -159,33 +207,35 @@ public class Fragment_Dialog extends BasicFragment implements GestureDetector.On
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
+//if(lp.topMargin==0){
+//    new AsynMove().execute(new Integer[] { 10 });// 正数展开
+//}else if(lp.topMargin==mTopMargin){
+//    new AsynMove().execute(new Integer[] { -10 });// 正数展开
+//}
+
         return false;
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        if(lp.topMargin ==-mTopMargin){
-            button2.setVisibility(View.GONE);
-        }else{
-
             isScrolling=true;
             scrollDistance+=distanceY;
-            mTopMargin=button2.getHeight();
-            Log.e(TAG, "Button2的Height是："+button2.getHeight()+"mTOPmargin是："+mTopMargin);
-            Log.e(TAG, "当期topMargin是："+lp.topMargin+";滚动距离是："+scrollDistance);
-            if (lp.topMargin >-mTopMargin && scrollDistance > 0) {//往左拖拉
+
+            Log.e(TAG, "button2.getHeight()是："+button2.getHeight()+"mTopMargin是："+mTopMargin);
+            Log.e(TAG, "当前lp.topMargin："+lp.topMargin+";scrollDistance是："+scrollDistance);
+            Log.e(TAG, "当前lp.topMargin："+lp.topMargin);
+            if (/*lp.topMargin >-mTopMargin&&lp.topMargin<=0 &&*/ scrollDistance > 0) {//往上拖拉
                 lp.topMargin = Math.max((lp.topMargin - scrollDistance), -mTopMargin);
 //            lp.topMargin=lp.topMargin -(int) scrollDistance;
                 button2.setLayoutParams(lp);
                 Log.e(TAG,"我在向上");
-            }else if (/*lp.topMargin > -(mTopMargin) &&*/ scrollDistance < 0) {//往右拖拉
+            }else if (/*lp.topMargin<0&& */scrollDistance < 0) {//往下拖拉
 //            lp.topMargin = Math.max((lp.topMargin + (int) scrollDistance),-mTopMargin);
                 lp.topMargin=lp.topMargin - (int) scrollDistance;
                 button2.setLayoutParams(lp);
                 Log.e(TAG,"我在向下");
             }
             button2.setVisibility(View.VISIBLE);
-        }
 
         return false;
     }
