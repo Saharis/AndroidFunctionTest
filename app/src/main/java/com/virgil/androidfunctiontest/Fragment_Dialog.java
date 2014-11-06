@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,7 +19,7 @@ public class Fragment_Dialog extends BasicFragment implements GestureDetector.On
     final String TAG = "检查触摸的坐标";
     int scrollDistance=0;
     private GestureDetector mGestureDetector;
-    private LinearLayout.LayoutParams lp;
+    private RelativeLayout.LayoutParams lp;
     private View button2;
     private  View button1;
     private LinearLayout button3;
@@ -25,7 +27,8 @@ public class Fragment_Dialog extends BasicFragment implements GestureDetector.On
     private boolean isScrolling;
     private int height_content;
     private int height_handle;
-    private LinearLayout.LayoutParams lp_handle;
+    private RelativeLayout.LayoutParams lp_handle;
+    private boolean mExpanded=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog1, container, false);
@@ -34,19 +37,24 @@ public class Fragment_Dialog extends BasicFragment implements GestureDetector.On
         button2 = (View) view.findViewById(R.id.button2);
         button3.setClickable(true);
         button3.setFocusable(true);
-        lp = (LinearLayout.LayoutParams) button2.getLayoutParams();
+        lp = (RelativeLayout.LayoutParams) button2.getLayoutParams();
         mGestureDetector = new GestureDetector(getActivity(),this);
         mGestureDetector.setIsLongpressEnabled(false);
 //        lp.addRule(RelativeLayout.BELOW, R.id.button1);
-        lp_handle=(LinearLayout.LayoutParams)button3.getLayoutParams();
+        lp_handle=(RelativeLayout.LayoutParams)button3.getLayoutParams();
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lp.topMargin += -1;
-                Log.e(TAG, "当前lp.topMargin" + lp.topMargin);
-                Log.e(TAG, "当前lp_handle.topMargin" + lp_handle.topMargin);
-                button2.setLayoutParams(lp);
+                Animation a;
+                if (mExpanded) {
+                    a = new ExpandAnimation(0, button2.getMeasuredHeight());
+                } else {
+                    a = new ExpandAnimation( button2.getMeasuredHeight(), 0);
+                }
+                a.setDuration(500);
+                button3.startAnimation(a);
+                mExpanded = !mExpanded;
             }
         });
         Button button01=(Button)view.findViewById(R.id.button01);
@@ -65,7 +73,29 @@ public class Fragment_Dialog extends BasicFragment implements GestureDetector.On
         button3.setOnTouchListener(touchListener);
         return view;
     }
+    private class ExpandAnimation extends Animation {
+        private final int mStartHeight;
+        private final int mDeltaHeight;
 
+        public ExpandAnimation(int startHeight, int endHeight) {
+            mStartHeight = startHeight;
+            mDeltaHeight = endHeight - startHeight;
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime,
+                                           Transformation t) {
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams )button3.getLayoutParams();
+            lp.topMargin = (int) (mStartHeight + mDeltaHeight * interpolatedTime);
+            button3.setLayoutParams(lp);
+        }
+
+        @Override
+        public boolean willChangeBounds() {
+            // TODO Auto-generated method stub
+            return true;
+        }
+    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         button2.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

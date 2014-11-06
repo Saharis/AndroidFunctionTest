@@ -29,6 +29,7 @@ public class CustomScrollView extends ScrollView {
 
     public CustomScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.setOnTouchListener(mOnTouchListener);
     }
 
     @Override
@@ -41,4 +42,16 @@ public class CustomScrollView extends ScrollView {
             return super.dispatchTouchEvent(ev);
 //        }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        return super.onTouchEvent(ev);
+    }
+    OnTouchListener mOnTouchListener=new OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return false;
+        }
+    };
+
 }

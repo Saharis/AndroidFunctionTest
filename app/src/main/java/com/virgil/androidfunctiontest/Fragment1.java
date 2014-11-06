@@ -1,22 +1,23 @@
 package com.virgil.androidfunctiontest;
 
+import android.content.Context;
+import android.inputmethodservice.InputMethodService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.view.*;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.*;
 
 import com.virgil.androidfunctiontest.datamodel.pay.Pay_TitleInfoModel;
 import com.virgil.androidfunctiontest.framework.BasicActivity;
 import com.virgil.androidfunctiontest.framework.BasicFragment;
+import com.virgil.androidfunctiontest.framework.IMMResult;
 import com.virgil.androidfunctiontest.util.DensityUtil;
+import com.virgil.androidfunctiontest.util.LogUtil;
 import com.virgil.androidfunctiontest.widget.Line;
 
 import java.util.ArrayList;
@@ -25,67 +26,146 @@ import java.util.ArrayList;
  * Created by liuwj on 2014/6/19.
  */
 public class Fragment1 extends BasicFragment{
-    public Pay_TitleInfoModel titleInfoModel=null;
-    private  LinearLayout frame;
-    private TextView tvdong;
-    private TextView tvjing;
-    private ScrollView sv;
-    int[] location = new int[2];
-    int[] location2 = new int[2];
+
+    private EditText editText;
+    private EditText editText2;
+    private int currentyeah=14;
+    private String changeContent="";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.mytest,null);
-    initview(view);
-        return view;
-    }
-    private void initview(View view) {
-        //在滚动的一个TextView
-        tvdong = (TextView) view.findViewById(R.id.dong);
-        //一开始是View.GONE的一个静止的TextView
-        tvjing = (TextView) view.findViewById(R.id.jing);
-        sv = (ScrollView) view.findViewById(R.id.eee);
-        tvjing.setVisibility(View.GONE);
+        editText=(EditText)view.findViewById(R.id.test_keyboard);
+        editText2=(EditText)view.findViewById(R.id.test_keyboard2);
+        final String tmp="0";
 
-        sv.setOnTouchListener(new View.OnTouchListener() {
-            private int lastY = 0;
-            private int touchEventId = -9983761;
-            Handler handler = new Handler() {
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    if (msg.what == touchEventId) {
-                        if (lastY != sv.getScrollY()) {
-                            //scrollview一直在滚动，会触发
-                            handler.sendMessageDelayed(
-                                    handler.obtainMessage(touchEventId, sv), 5);
-                            lastY = sv.getScrollY();
-                            tvdong.getLocationOnScreen(location);
-                            tvjing.getLocationOnScreen(location2);
-                            //动的到静的位置时，静的显示。动的实际上还是网上滚动，但我们看到的是静止的那个
-                            if (location[1] <= location2[1]) {
-                                tvjing.setVisibility(View.VISIBLE);
-                            } else {
-                                //静止的隐藏了
-                                tvjing.setVisibility(View.GONE);
-                            }
+        editText2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                LogUtil.i("MYTTAG:beforeTextChanged--"+"s:"+s+";start"+start+";count:"+count+";after:"+after);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LogUtil.i("MYTTAG:onTextChanged--"+"s:"+s+";start"+start+";count:"+count+";before:"+before);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s){
+                String content=s.toString();
+                if(content!=null){
+                    if(content.length()==2){
+                        if(content.startsWith("0")&&content.endsWith("0")){
+                            editText2.setText("0");
+                            editText2.setSelection(1);
+                            editText2.invalidate();
+                        }else if(content.startsWith("1")&&!content.endsWith("0")&&!content.endsWith("1")&&!content.endsWith("2")){
+                            editText2.setText("0");
+                            editText2.setSelection(1);
+                            editText2.invalidate();
+                        }
+                    }else if(content.length()==4){
+                        int a=(int)content.charAt(3);
+                        if(!(a*10>currentyeah&&a*10<(currentyeah+25))){
+                            editText2.setText(content.substring(0,3));
+                            editText2.setSelection(3);
+                            editText2.invalidate();
+                        }
+                    }else if(content.length()==5){
+                        int a=(int)content.charAt(3);
+                        if(!(a*10>currentyeah&&a*10<(currentyeah+25))){
+                            editText2.setText(content.substring(0,4));
+                            editText2.setSelection(4);
+                            editText2.invalidate();
                         }
                     }
                 }
-            };
+               }
+        });
+        view.findViewById(R.id.button_keybo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText("A");
+            }
+        });
+        editText.addTextChangedListener(new TextWatcher() {
+            int beforeLength=0;
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                beforeLength=editText.getText().length();
 
-            public boolean onTouch(View v, MotionEvent event) {
-                //必须两个都搞上，不然会有瑕疵。
-                //没有这段，手指按住拖动的时候没有效果
-                if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    handler.sendMessageDelayed(
-                            handler.obtainMessage(touchEventId, v), 5);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int length = editText.getText().toString().length();
+                try {
+                    //输入框从0开始输入，如果第一个数字大于1，则在前面加“0”
+                    if (beforeLength == 0 && length == 1 && start == 0 && s.length() == 1 && Integer.parseInt(s + "") >1) {
+                        editText.removeTextChangedListener(this);
+                        editText.setText("0" + s + "/");
+                        editText.setSelection(3);
+                        editText.addTextChangedListener(this);
+                    }else{
+                        if(length==2&&start==1&&count==1){
+                            editText.removeTextChangedListener(this);
+                            editText.setText( s + "/");
+                            editText.setSelection(3);
+                            editText.addTextChangedListener(this);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                //没有这段，手指松开scroll继续滚动的时候，没有效果
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    handler.sendMessageDelayed(
-                            handler.obtainMessage(touchEventId, v), 5);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String content=s.toString();
+                changeContent=null;
+                if(content!=null){
+                    if(content.length()==2){
+                        if(content.startsWith("0")&&content.endsWith("0")){
+                            changeContent=content.substring(0,1);
+                        }else if(content.startsWith("1")&&!content.endsWith("0")&&!content.endsWith("1")&&!content.endsWith("2")){
+                            changeContent=content.substring(0,1);
+                        }
+                    }else if(content.length()==4){
+                        int a=Integer.valueOf(content.substring(3));
+                        if(!((a)>=currentyeah/10&&a<=(currentyeah+25)/10)){
+                            changeContent=content.substring(0,3);
+                        }
+                    }else if(content.length()==5){
+                        int a=Integer.valueOf(content.substring(3));
+                        if(!(a>=currentyeah&&a<=(currentyeah+25))){
+                            changeContent=content.substring(0,4);
+                        }
+                    }
                 }
+                if(changeContent!=null){
+                    editText.removeTextChangedListener(this);
+                    editText.setText(changeContent);
+                    editText.setSelection(changeContent.length());
+                    editText.invalidate();
+                    editText.addTextChangedListener(this);
+                }
+            }
+        });
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                LogUtil.i("MYTTAG:keyKcode--keyCode:"+event.keyCodeToString(keyCode)+";action");
+                if(keyCode==KeyEvent.KEYCODE_DEL&&event.getAction()==KeyEvent.ACTION_DOWN){
+                    if(editText.getText().length()==3){
+                        editText.setText(editText.getText().subSequence(0,1));
+                        editText.setSelection(1);
+                        return true;
+                    }
+                }
+
                 return false;
             }
         });
+        return view;
     }
+
 }

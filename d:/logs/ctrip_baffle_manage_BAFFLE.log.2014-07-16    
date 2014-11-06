@@ -1,9 +1,0 @@
-[DEBUG][2014-07-16 12:44:00] [ ctrip.data.listener.InitListener.contextInitialized(InitListener.java:20) ] init listener ... ...file:/Users/liuwujing/Documents/DEV/apache-tomcat/webapps/CtripBaffleManage/WEB-INF/classes/ModelRealName.txt
-[DEBUG][2014-07-16 12:44:09] [ ctrip.data.controller.BaffleController.searchBaffle(BaffleController.java:168) ] searchBaffle
-[DEBUG][2014-07-16 20:11:17] [ ctrip.data.listener.InitListener.contextInitialized(InitListener.java:20) ] init listener ... ...file:/Users/liuwujing/Documents/DEV/apache-tomcat/webapps/CtripBaffleManage/WEB-INF/classes/ModelRealName.txt
-[DEBUG][2014-07-16 20:11:33] [ ctrip.data.controller.BaffleController.searchBaffle(BaffleController.java:168) ] searchBaffle
-[DEBUG][2014-07-16 20:12:42] [ ctrip.data.controller.BaffleConfigController.dataService(BaffleConfigController.java:116) ] dataService[action:1][data:{"user_name":"liuwj","platform_code":1,"charsetName":"","realServiceCode":"","pk":0}]
-[DEBUG][2014-07-16 20:27:23] [ ctrip.data.controller.BaffleConfigController.dataService(BaffleConfigController.java:116) ] dataService[action:1][data:{"user_name":"liuwj","platform_code":1,"charsetName":"","realServiceCode":"","pk":0}]
-[DEBUG][2014-07-16 20:32:58] [ ctrip.data.controller.BaffleConfigController.dataService(BaffleConfigController.java:116) ] dataService[action:1][data:{"user_name":"liuwj","platform_code":1,"charsetName":"","realServiceCode":"","pk":0}]
-[DEBUG][2014-07-16 20:40:04] [ ctrip.data.controller.BaffleConfigController.dataService(BaffleConfigController.java:116) ] dataService[action:1][data:{"user_name":"liuwj","platform_code":1,"charsetName":"","realServiceCode":"","pk":0}]
-[DEBUG][2014-07-16 20:42:56] [ ctrip.data.controller.BaffleConfigController.dataService(BaffleConfigController.java:116) ] dataService[action:1][data:{"user_name":"liuwj","platform_code":1,"charsetName":"","realServiceCode":"","pk":0}]

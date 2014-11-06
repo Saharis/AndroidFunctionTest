@@ -60,4 +60,10 @@
         <!-- Defines closed handle (drawable/color). -->
         <attr name="closedHandle" format="reference|color" />
     </declare-styleable>
+
+        <declare-styleable name="ExpandablePanel">
+            <attr name="handle_Expandable" format="reference" />
+            <attr name="content_Expandable" format="reference" />
+            <attr name="collapsedHeight" format="dimension" />
+        </declare-styleable>
 </resources>

@@ -15,7 +15,7 @@
             android:layout_height="60dip"
             android:background="@drawable/all_oval_angle_shape"
             android:text="button1"/>
-    <LinearLayout
+    <RelativeLayout
             android:id="@+id/sad"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                     android:text="button_add5"/>
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.virgil.androidfunctiontest.widget.CustomScrollView
             android:id="@+id/custom_scrollview"

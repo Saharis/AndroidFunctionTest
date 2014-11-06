@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-
 
     <Button
             android:id="@+id/button_test2"
             android:layout_width="200dip"
             android:layout_height="60dip"
             android:background="@color/gray"
-            android:layout_below="@+id/button_test1"
             android:visibility="visible"
             android:text="button_add2"/>
 
@@ -22,8 +19,8 @@
             android:layout_height="40dip"
             android:background="@color/gray"
             android:visibility="visible"
-            android:layout_below="@+id/button_test2"
             android:text="button_add3"/>
+
     <Button
             android:id="@+id/button_test1"
             android:layout_width="200dip"
@@ -32,4 +29,56 @@
             android:visibility="visible"
             android:layout_marginTop="10dp"
             android:text="button_add1"/>
-</RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/paycontentshadowup"/>
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/paycontentshadowdown"
+                android:layout_alignParentBottom="true"/>
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                <Button
+                        android:id="@+id/button_1"
+                        android:layout_width="200dip"
+                        android:layout_height="40dip"
+                        android:text="button_add2"/>
+
+                <Button
+                        android:id="@+id/button_2"
+                        android:layout_width="200dip"
+                        android:layout_height="40dip"
+                        android:visibility="visible"
+                        android:text="button_add3"/>
+
+                <Button
+                        android:id="@+id/button_3"
+                        android:layout_width="200dip"
+                        android:layout_height="40dip"
+                        android:visibility="visible"
+                        android:text="button_add1"/>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</LinearLayout>

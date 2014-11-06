@@ -3,7 +3,9 @@
     package="com.virgil.androidfunctiontest">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="21"/>
 
     <supports-screens
         android:anyDensity="true"

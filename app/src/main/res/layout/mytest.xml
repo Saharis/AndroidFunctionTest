@@ -1,44 +1,48 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-             tools:context=".MainActivity" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:example="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
 
-    <ScrollView
-            android:id="@+id/eee"
+    <EditText
+            android:id="@+id/test_keyboard"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="测试键盘弹起"/>
+    <EditText
+            android:id="@+id/test_keyboard2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="测试键盘弹起2"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_keybo"
+            android:text="testKeyboard"/>
+    <com.virgil.androidfunctiontest.widget.ExpandablePanel
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-
-        <LinearLayout
+            example:handle_Expandable="@+id/expand"
+            example:content_Expandable="@+id/value"
+            example:collapsedHeight="50dip">
+        <TextView
+                android:id="@id/value"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FF8800"
-                    android:text="\n这  \n 是 \n   展   \n 示\n图\n片\n\n" />
-
-            <TextView
-                    android:id="@+id/dong"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#008833"
-                    android:text="\n\n这  是   滚  动    的     等  一  下  固  定  在 上  面\n\n" />
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00ff33"
-                    android:text="~~~~~~\n\n\n\n这\n\n\n\n\n\n是\n\n\n\n\n\n其\n\n\n\n\n他\n\n\n\n\n\n\n的\n\n\n~~~~~~~" />
-        </LinearLayout>
-    </ScrollView>
-
-    <TextView
-            android:id="@+id/jing"
-            android:layout_width="fill_parent"
+                android:maxHeight="50dip"
+                android:text="sssssssss"
+                />
+        <Button
+                android:id="@id/expand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More" />
+    </com.virgil.androidfunctiontest.widget.ExpandablePanel>
+    <Button
+            android:id="@+id/expand11"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#008800"
-            android:text="\n\n这    是   固     定     的\n\n" />
-</FrameLayout>
+            android:text="kkkklkkk" />
+</LinearLayout>

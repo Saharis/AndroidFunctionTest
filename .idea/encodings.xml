@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/Fragment1.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/Fragment2.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/Fragment3.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/Fragment_Calender.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/Fragment_Dialog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/util/DeviceUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/widget/InnerScrollView2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/virgil/androidfunctiontest/widget/Tooth.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/all_oval_angle_shape.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/all_oval_angle_shape_normal.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/all_oval_angle_shape_pressed.xml" charset="GBK" />

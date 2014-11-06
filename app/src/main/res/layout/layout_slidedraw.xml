@@ -12,8 +12,7 @@
             android:layout_width="200dip"
             android:layout_height="50dip"
             android:text="上面的Title"
-            android:gravity="center"
-            android:background="@drawable/abc_ic_go"/>
+            android:gravity="center"/>
 
     <com.virgil.androidfunctiontest.widget.Panel
             android:id="@+id/mySliding"

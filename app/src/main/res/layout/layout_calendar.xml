@@ -1,116 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+        <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+<RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
-
-    <TextView
-            android:layout_width="200dip"
-            android:layout_height="50dip"
-            android:text="上面的Title"
-            android:gravity="center"
-            android:background="@drawable/abc_ic_go"/>
-
-    <com.virgil.androidfunctiontest.widget.InnerScrollView
-            android:id="@+id/scroll_parent"
+    <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/paycontentshadowup"/>
+    <ScrollView
+            android:id="@+id/myScroll"
+            android:layout_below="@+id/mytooth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
         <LinearLayout
-                android:orientation="vertical"
+                android:id="@+id/myScroll_son"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp"
-                android:gravity="center">
-
-            <com.virgil.androidfunctiontest.widget.InnerScrollView
-                    android:id="@+id/scroll_son2"
-                    android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <Button
+                    android:id="@+id/buttonShow"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scrollbars="none">
-
-                <LinearLayout
-                        android:id="@+id/drag_me"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:layout_height="200dip">
-
+                    android:text="dadfsad"/>
                 </LinearLayout>
-            </com.virgil.androidfunctiontest.widget.InnerScrollView>
+    </ScrollView>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/paycontentshadowdown"/>
 
-
-            <TextView
-                    android:id="@+id/drag_me1"
-                    android:layout_width="200dip"
-                    android:layout_height="50dip"
-                    android:text="点我拖动"
-                    android:gravity="center"/>
-
-            <com.virgil.androidfunctiontest.widget.InnerScrollView
-                    android:id="@+id/scroll_son1"
-                    android:layout_width="match_parent"
-                    android:layout_height="700dip"
-                    android:scrollbars="none">
-
-                <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:layout_height="wrap_content">
-
-                    <Button
-                            android:id="@+id/button_slide1"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow1"/>
-
-                    <Button
-                            android:id="@+id/button_slide2"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow2"/>
-
-                    <Button
-                            android:id="@+id/button_slide3"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow3"/>
-
-                    <Button
-                            android:id="@+id/button_slide4"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow4"/>
-
-                    <Button
-                            android:id="@+id/button_slide5"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow5"/>
-
-                    <Button
-                            android:id="@+id/button_slide6"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow6"/>
-
-                    <Button
-                            android:id="@+id/button_slide7"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow7"/>
-
-                    <Button
-                            android:id="@+id/button_slide8"
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:text="justToShow8"/>
-
-                </LinearLayout>
-            </com.virgil.androidfunctiontest.widget.InnerScrollView>
-        </LinearLayout>
-    </com.virgil.androidfunctiontest.widget.InnerScrollView>
-</LinearLayout>
+    <com.virgil.androidfunctiontest.widget.Tooth
+            android:id="@+id/mytooth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_sc">
+    </com.virgil.androidfunctiontest.widget.Tooth>
+    <Button android:id="@+id/button_sc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PRressMe"/>
+</RelativeLayout>
+</RelativeLayout>

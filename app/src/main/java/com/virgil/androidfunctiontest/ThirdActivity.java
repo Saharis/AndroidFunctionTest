@@ -46,37 +46,7 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.stack_button_1:
-                if(fragment1==null){
-                    fragment1=new Fragment1();
-                    fragment1.titleInfoModel=new Pay_TitleInfoModel();
-                    fragment1.titleInfoModel.title_main="";
-                    fragment1.titleInfoModel.title_vice="";
-                    ArrayList<Pay_TitleInfoModel> list=new ArrayList<Pay_TitleInfoModel>();
-                    list.add(new Pay_TitleInfoModel("主第一个",""));
-                    list.add(new Pay_TitleInfoModel("主第二个",""));
-                    list.add(new Pay_TitleInfoModel("主第三个",""));
-                    fragment1.titleInfoModel.childTitleList=list;
-                }
-                jumpToFragment(fragment1, "1");
-                break;
-            case R.id.stack_button_2:
-                if(fragment_calender==null){
-                    fragment_calender=new Fragment_Calender();
-                }
-                jumpToFragment(fragment_calender, "calender");
-                break;
-            case R.id.stack_button_3:
-//                Fragment_Dialog dialogFragment=new Fragment_Dialog();
-//                dialogFragment.setContent_text("第一次测试");
-//                FragmentTransaction ft=getFragmentManager().beginTransaction();
-//                ft.add(R.id.fragment_to_replace,dialogFragment);
-//
-//                ft.commit();
-//                dialogFragment.show(getFragmentManager(),"dialog");
-                break;
-        }
+
     }
     private void excuteFragment(BasicFragment fragment){
         FragmentTransaction ft=getFragmentManager().beginTransaction();

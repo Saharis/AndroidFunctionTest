@@ -1,13 +1,14 @@
 package com.virgil.androidfunctiontest;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import android.widget.ScrollView;
-import android.widget.SlidingDrawer;
 import com.virgil.androidfunctiontest.framework.BasicActivity;
 
 import java.util.ArrayList;
@@ -54,5 +55,9 @@ public class SecondActivity extends BasicActivity {
         setContentView(view);
 
     }
-
+    public static void initFragment(FragmentManager fragmentManager,Fragment targetFragment,String tag,int postion){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(postion, targetFragment, tag);
+        transaction.commitAllowingStateLoss();
+    }
 }
