@@ -1,4 +1,4 @@
-package com.virgil.aft.view;
+package com.virgil.aft.business.view;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

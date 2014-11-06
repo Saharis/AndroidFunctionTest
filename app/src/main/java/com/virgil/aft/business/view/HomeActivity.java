@@ -1,10 +1,11 @@
-package com.virgil.aft.view;
+package com.virgil.aft.business.view;
 
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,20 +16,23 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.virgil.aft.ICountSerAIDL;
 import com.virgil.aft.R;
-import com.virgil.aft.component.ICountService;
 import com.virgil.aft.framework.BasicActivity;
-import com.virgil.aft.framework.CountService;
 import com.virgil.aft.util.LogUtil;
 
 
 public class HomeActivity extends BasicActivity implements View.OnClickListener {
-    private ICountService iCountSer=null;
+    private ICountSerAIDL iCountSer=null;
     private ServiceConnection serviceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            iCountSer=(ICountService)service;
-            LogUtil.i("CountService Binded:getCount is "+iCountSer.getInfo());
+            iCountSer=(ICountSerAIDL)service;
+            try {
+                LogUtil.i("CountServiceAIDL Binded:getCount is "+iCountSer.getCon());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
