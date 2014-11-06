@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.virgil.androidfunctiontest">
+    package="com.virgil.aft">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21"/>
 
     <supports-screens
@@ -19,18 +19,18 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".core.BaseApplication"
+        android:name="com.virgil.aft.core.BaseApplication"
         android:theme="@style/AppTheme">
         <receiver
-            android:name="com.virgil.androidfunctiontest.NetWorkReceiver"
+            android:name="com.virgil.aft.NetWorkReceiver"
             android:label="NetWorkConnection">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
         <activity
-            android:name=".HomeActivity"
+            android:name="com.virgil.aft.view.HomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,9 +38,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".framework.BasicActivity"></activity>
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".ThirdActivity"></activity>
+        <activity android:name="com.virgil.aft.framework.BasicActivity"/>
+        <activity android:name="com.virgil.aft.view.SecondActivity"/>
+        <activity android:name="com.virgil.aft.view.ThirdActivity"/>
+        <service android:name=".framework.CountService">
+            <intent-filter>
+                <action android:name="com.virgil.aft.framework.CountService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

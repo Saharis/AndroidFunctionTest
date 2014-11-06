@@ -40,12 +40,12 @@
             android:layout_alignParentBottom="true"
             android:src="@drawable/paycontentshadowdown"/>
 
-    <com.virgil.androidfunctiontest.widget.Tooth
+    <com.virgil.aft.widget.Tooth
             android:id="@+id/mytooth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button_sc">
-    </com.virgil.androidfunctiontest.widget.Tooth>
+    </com.virgil.aft.widget.Tooth>
     <Button android:id="@+id/button_sc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/button_keybo"
             android:text="testKeyboard"/>
-    <com.virgil.androidfunctiontest.widget.ExpandablePanel
+    <com.virgil.aft.widget.ExpandablePanel
             android:orientation="vertical"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="More" />
-    </com.virgil.androidfunctiontest.widget.ExpandablePanel>
+    </com.virgil.aft.widget.ExpandablePanel>
     <Button
             android:id="@+id/expand11"
             android:layout_width="wrap_content"

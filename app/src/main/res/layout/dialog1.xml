@@ -109,7 +109,7 @@
 
     </RelativeLayout>
 
-    <com.virgil.androidfunctiontest.widget.CustomScrollView
+    <com.virgil.aft.widget.CustomScrollView
             android:id="@+id/custom_scrollview"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sad"
@@ -180,5 +180,5 @@
 
         </LinearLayout>
 
-    </com.virgil.androidfunctiontest.widget.CustomScrollView>
+    </com.virgil.aft.widget.CustomScrollView>
 </LinearLayout>

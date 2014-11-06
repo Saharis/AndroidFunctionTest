@@ -14,7 +14,7 @@
             android:text="上面的Title"
             android:gravity="center"/>
 
-    <com.virgil.androidfunctiontest.widget.Panel
+    <com.virgil.aft.widget.Panel
             android:id="@+id/mySliding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             </ScrollView>
         </LinearLayout>
 
-    </com.virgil.androidfunctiontest.widget.Panel>
+    </com.virgil.aft.widget.Panel>
 
 
 
