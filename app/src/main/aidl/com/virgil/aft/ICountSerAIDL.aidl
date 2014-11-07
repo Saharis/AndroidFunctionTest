@@ -5,5 +5,5 @@ import com.virgil.aft.business.view.bean.CountBean;
 
 interface ICountSerAIDL {
             CountBean getCon();
-            void setCon(inout CountBean ob);
+            void setCon(in CountBean ob);
 }
