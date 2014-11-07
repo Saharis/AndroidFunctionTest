@@ -30,7 +30,7 @@
         </receiver>
 
         <activity
-            android:name="com.virgil.aft.view.HomeActivity"
+            android:name=".business.view.HomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,8 +39,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.virgil.aft.framework.BasicActivity"/>
-        <activity android:name="com.virgil.aft.view.SecondActivity"/>
-        <activity android:name="com.virgil.aft.view.ThirdActivity"/>
+        <activity android:name=".business.view.SecondActivity"/>
+        <activity android:name=".business.view.ThirdActivity"/>
         <service android:name=".framework.CountService">
             <intent-filter>
                 <action android:name="com.virgil.aft.framework.CountService"/>

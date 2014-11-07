@@ -1,7 +1,5 @@
 package com.virgil.aft.component;
 
-import java.util.Objects;
-
 /**
  * Created by liuwujing on 14/11/6.
  */

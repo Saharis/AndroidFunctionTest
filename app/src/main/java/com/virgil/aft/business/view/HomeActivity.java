@@ -27,7 +27,7 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
     private ServiceConnection serviceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            iCountSer=(ICountSerAIDL)service;
+            iCountSer=ICountSerAIDL.Stub.asInterface(service);
             try {
                 LogUtil.i("CountServiceAIDL Binded:getCount is "+iCountSer.getCon());
             } catch (RemoteException e) {

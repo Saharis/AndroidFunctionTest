@@ -4,16 +4,29 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteException;
 
-import com.virgil.aft.component.ICountService;
+import com.virgil.aft.ICountSerAIDL;
+import com.virgil.aft.business.view.bean.CountBean;
 import com.virgil.aft.util.LogUtil;
 
 /**
  * Created by liuwujing on 14/11/6.
  */
-public class CountService extends Service implements ICountService{
+public class CountService extends Service{
     private boolean stopCounting=false;
     private int count=0;
+    private ICountSerAIDL.Stub servBinder=new ICountSerAIDL.Stub() {
+        @Override
+        public CountBean getCon() throws RemoteException {
+            return new CountBean(count);
+        }
+
+        @Override
+        public void setCon(CountBean ob) throws RemoteException {
+
+        }
+    };
     private CountServiceBinder serBinder=new CountServiceBinder();
     @Override
     public void onCreate() {
@@ -36,7 +49,7 @@ public class CountService extends Service implements ICountService{
 
     @Override
     public IBinder onBind(Intent intent) {
-        return serBinder;
+        return servBinder;
     }
 
     @Override
@@ -46,28 +59,7 @@ public class CountService extends Service implements ICountService{
         super.onDestroy();
     }
 
-    @Override
-    public int getInfo() {
-        return count;
-    }
+    class CountServiceBinder extends Binder {
 
-    @Override
-    public void setInfo(Object ob) {
-        if(ob instanceof Integer){
-            count=(Integer)ob;
-        }
-    }
-    class CountServiceBinder extends Binder implements ICountService{
-        @Override
-        public int getInfo() {
-            return count;
-        }
-
-        @Override
-        public void setInfo(Object ob) {
-            if(ob instanceof Integer){
-                count=(Integer)ob;
-            }
-        }
     }
 }
