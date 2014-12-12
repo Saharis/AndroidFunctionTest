@@ -80,7 +80,7 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         this.findViewById(R.id.main_button).setOnClickListener(this);
         this.findViewById(R.id.main_button2).setOnClickListener(this);
         this.findViewById(R.id.main_button3).setOnClickListener(this);
-        this.bindService(new Intent("com.virgil.aft.framework.CountService"), serviceCon, BIND_AUTO_CREATE);
+//        this.bindService(new Intent("com.virgil.aft.framework.CountService"), serviceCon, BIND_AUTO_CREATE);
 //        this.startService(new Intent(this, CountService.class));
     }
 

@@ -18,16 +18,15 @@ public class CountService extends Service{
     private int count=0;
     private ICountSerAIDL.Stub servBinder=new ICountSerAIDL.Stub() {
         @Override
-        public CountBean getCon() throws RemoteException {
-            return new CountBean(count);
+        public String getCon() throws RemoteException {
+            return String.valueOf(count);
         }
 
         @Override
-        public void setCon(CountBean ob) throws RemoteException {
+        public void setCon(String ob) throws RemoteException {
 
         }
     };
-    private CountServiceBinder serBinder=new CountServiceBinder();
     @Override
     public void onCreate() {
         super.onCreate();
@@ -59,7 +58,4 @@ public class CountService extends Service{
         super.onDestroy();
     }
 
-    class CountServiceBinder extends Binder {
-
-    }
 }

@@ -3,9 +3,12 @@
     package="com.virgil.aft">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="21"/>
+        android:targetSdkVersion="21" />
 
     <supports-screens
         android:anyDensity="true"
@@ -25,7 +28,7 @@
             android:name="com.virgil.aft.NetWorkReceiver"
             android:label="NetWorkConnection">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
@@ -38,14 +41,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.virgil.aft.framework.BasicActivity"/>
-        <activity android:name=".business.view.SecondActivity"/>
-        <activity android:name=".business.view.ThirdActivity"/>
+        <activity android:name="com.virgil.aft.framework.BasicActivity" />
+        <activity android:name=".business.view.SecondActivity" />
+        <activity android:name=".business.view.ThirdActivity" />
+
         <service android:name=".framework.CountService">
             <intent-filter>
-                <action android:name="com.virgil.aft.framework.CountService"/>
+                <action android:name="com.virgil.aft.framework.CountService" />
             </intent-filter>
         </service>
+        <!--<receiver android:name=""-->
     </application>
 
 </manifest>
