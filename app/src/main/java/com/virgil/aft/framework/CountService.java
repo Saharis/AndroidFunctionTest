@@ -14,7 +14,7 @@ import com.virgil.aft.util.LogUtil;
  * Created by liuwujing on 14/11/6.
  */
 public class CountService extends Service{
-    private boolean stopCounting=false;
+    private volatile boolean stopCounting=false;
     private int count=0;
     private ICountSerAIDL.Stub servBinder=new ICountSerAIDL.Stub() {
         @Override
@@ -24,7 +24,11 @@ public class CountService extends Service{
 
         @Override
         public void setCon(String ob) throws RemoteException {
-
+            if("stop".equals(ob)){
+                stopCounting=true;
+            }else{
+                stopCounting=false;
+            }
         }
     };
     @Override

@@ -145,7 +145,7 @@ public class DeviceUtil {
 	/**获取动画设置*/
 	@SuppressWarnings("deprecation")
 	public static boolean getAnimationSetting(){
-		 ContentResolver cv = ApplicationCache.getApplication().getContentResolver();
+		 ContentResolver cv = ApplicationCache.getInstance().getApplication().getContentResolver();
 	     String animation = android.provider.Settings.System.getString(cv, android.provider.Settings.System.TRANSITION_ANIMATION_SCALE);
 	     return false;
 	}
@@ -237,6 +237,6 @@ public class DeviceUtil {
 
 	public static int getPixelFromDip(float f) {
 		// TODO Auto-generated method stub
-		return getPixelFromDip(ApplicationCache.getApplication().getResources().getDisplayMetrics(),f);
+		return getPixelFromDip(ApplicationCache.getInstance().getApplication().getResources().getDisplayMetrics(),f);
 	}
 }

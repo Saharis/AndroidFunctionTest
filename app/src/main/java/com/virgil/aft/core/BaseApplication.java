@@ -10,6 +10,6 @@ public class BaseApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        ApplicationCache.setApplication(this);
+        ApplicationCache.getInstance().setApplication(this);
     }
 }

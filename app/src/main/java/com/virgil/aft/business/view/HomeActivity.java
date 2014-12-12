@@ -18,6 +18,7 @@ import android.widget.ViewFlipper;
 
 import com.virgil.aft.ICountSerAIDL;
 import com.virgil.aft.R;
+import com.virgil.aft.core.ApplicationCache;
 import com.virgil.aft.framework.BasicActivity;
 import com.virgil.aft.util.LogUtil;
 
@@ -28,6 +29,8 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             iCountSer=ICountSerAIDL.Stub.asInterface(service);
+            ApplicationCache.getInstance().setiCountSer(iCountSer);
+
             try {
                 LogUtil.i("CountServiceAIDL Binded:getCount is "+iCountSer.getCon());
             } catch (RemoteException e) {
@@ -80,7 +83,7 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         this.findViewById(R.id.main_button).setOnClickListener(this);
         this.findViewById(R.id.main_button2).setOnClickListener(this);
         this.findViewById(R.id.main_button3).setOnClickListener(this);
-//        this.bindService(new Intent("com.virgil.aft.framework.CountService"), serviceCon, BIND_AUTO_CREATE);
+        this.bindService(new Intent("com.virgil.aft.framework.CountService"), serviceCon, BIND_AUTO_CREATE);
 //        this.startService(new Intent(this, CountService.class));
     }
 

@@ -30,8 +30,8 @@ public class Tooth extends LinearLayout{
             int width = bitmap.getWidth();
             bitmap.recycle();
             //获取屏幕信息
-            if(ApplicationCache.getApplication()!=null) {
-                DisplayMetrics dm = ApplicationCache.getApplication().getResources().getDisplayMetrics();
+            if(ApplicationCache.getInstance().getApplication()!=null) {
+                DisplayMetrics dm = ApplicationCache.getInstance().getApplication().getResources().getDisplayMetrics();
 
                 int screenWidth = DeviceUtil.getScreenSize(dm)[0];
                 int times = 0;
