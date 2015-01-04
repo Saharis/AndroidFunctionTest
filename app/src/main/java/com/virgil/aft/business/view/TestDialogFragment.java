@@ -12,7 +12,7 @@ import android.widget.Toast;
 /**
  * Created by liuwujing on 14/11/26.
  */
-public class TestDialogFragment extends DialogFragment{
+public class TestDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

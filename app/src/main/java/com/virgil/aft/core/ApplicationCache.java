@@ -1,11 +1,11 @@
 package com.virgil.aft.core;
 
+import java.util.ArrayList;
+
 import android.app.Application;
 
 import com.virgil.aft.ICountSerAIDL;
 import com.virgil.aft.framework.BasicActivity;
-
-import java.util.ArrayList;
 
 /**
  * s

@@ -1,54 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-        <RelativeLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="20dip">
 
-<RelativeLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/paycontentshadowup"/>
-    <ScrollView
-            android:id="@+id/myScroll"
-            android:layout_below="@+id/mytooth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-        <LinearLayout
-                android:id="@+id/myScroll_son"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <Button
-                    android:id="@+id/buttonShow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="dadfsad"/>
-                </LinearLayout>
-    </ScrollView>
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/paycontentshadowdown"/>
-
-    <com.virgil.aft.widget.Tooth
-            android:id="@+id/mytooth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_sc">
-    </com.virgil.aft.widget.Tooth>
-    <Button android:id="@+id/button_sc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PRressMe"/>
-</RelativeLayout>
 </RelativeLayout>

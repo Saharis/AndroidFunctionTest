@@ -1,11 +1,20 @@
 package com.virgil.aft.business.view;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteException;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,15 +33,18 @@ import com.virgil.aft.util.LogUtil;
 
 
 public class HomeActivity extends BasicActivity implements View.OnClickListener {
-    private ICountSerAIDL iCountSer=null;
+    private TextView tx_2;
+    private ICountSerAIDL iCountSer = null;
+    private Thread myThread;
+    private DatagramSocket socketServer;
     private ServiceConnection serviceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            iCountSer=ICountSerAIDL.Stub.asInterface(service);
+            iCountSer = ICountSerAIDL.Stub.asInterface(service);
             ApplicationCache.getInstance().setiCountSer(iCountSer);
 
             try {
-                LogUtil.i("CountServiceAIDL Binded:getCount is "+iCountSer.getCon());
+                LogUtil.i("CountServiceAIDL Binded:getCount is " + iCountSer.getCon());
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -40,7 +52,7 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            iCountSer=null;
+            iCountSer = null;
             LogUtil.i("CountService Binded: stoped ");
         }
     };
@@ -70,10 +82,29 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         }
     }
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    String content=(String)msg.obj;
+                    if(TextUtils.isEmpty(content)){
+                        tx_2.append("\n"+content);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        View view = getLayoutInflater().inflate(R.layout.activity_home, null);
+        setContentView(view);
+        tx_2 = (TextView) view.findViewById(R.id.main_text2);
         ViewFlipper flipper = (ViewFlipper) this.findViewById(R.id.main_fliper);
         flipper.startFlipping();
         flipper.setInAnimation(AnimationUtils.loadAnimation(this,
@@ -85,8 +116,71 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         this.findViewById(R.id.main_button3).setOnClickListener(this);
         this.bindService(new Intent("com.virgil.aft.framework.CountService"), serviceCon, BIND_AUTO_CREATE);
 //        this.startService(new Intent(this, CountService.class));
-    }
 
+        try {
+            socketServer=new DatagramSocket(8001);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        initMyThread();
+    }
+private void initMyThread(){
+    myThread=new Thread(new Runnable() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            msg.what=1;
+            Bundle b = new Bundle();
+
+            try {
+                // 定义缓冲区
+                byte[] buffer = new byte[1024];
+                // 定义接收数据包
+                DatagramPacket packet = new DatagramPacket(buffer,
+                        buffer.length);
+                while (true) {
+                    msg = mHandler.obtainMessage();
+                    // 接收数据
+                    socketServer.receive(packet);
+                    // 判断是否收到数据，然后输出字符串
+                    if (packet.getLength() > 0) {
+                        String str = new String(buffer, 0, packet
+                                .getLength());
+                        b.putString("data", str + "\n");
+                        msg.setData(b);
+                        // 将Message对象加入到消息队列当中
+                        mHandler.sendMessage(msg);
+                        Log.e("myLog", "sendMessage");
+                    }
+                }
+            } catch (SocketException e) {
+                Log.e("DEBUG_TAG", e.toString());// e.printStackTrace();原来还想外围加个while用label跳转，试试而已
+            } catch (IOException e) {
+                Log.e("DEBUG_TAG", e.toString());// e.printStackTrace();
+            }
+        }
+    });
+}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!myThread.isAlive()){
+            if(socketServer.isClosed()){
+                Log.e("myLog","Resume thread");
+                // 定义UDP监听
+                try {
+                    socketServer = new DatagramSocket(8001);
+                    //server.setReuseAddress(true);
+                } catch (SocketException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            initMyThread();
+            myThread.start();
+            //mReceiveThread.run();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

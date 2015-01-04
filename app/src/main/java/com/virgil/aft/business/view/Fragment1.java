@@ -1,7 +1,5 @@
 package com.virgil.aft.business.view;
 
-import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,10 +7,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,12 +93,19 @@ public class Fragment1 extends BasicFragment {
                 CommUtil.showLogInToast("ss");
             }
         });
+        Button bt_Toast=new Button(context);
+        bt_Toast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommUtil.showToast("Application.getFilesDir()=" + ApplicationCache.getInstance().getApplication().getFilesDir().getAbsolutePath());
+            }
+        });
         view.addView(bt_Other);
 
         view.addView(bt_ServiceStart);
         view.addView(bt_ServiceStop);
+        view.addView(bt_Toast);
         return view;
-
     }
 
 }
