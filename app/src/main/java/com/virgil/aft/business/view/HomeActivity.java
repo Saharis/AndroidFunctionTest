@@ -5,6 +5,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -20,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
@@ -29,6 +35,7 @@ import com.virgil.aft.ICountSerAIDL;
 import com.virgil.aft.R;
 import com.virgil.aft.core.ApplicationCache;
 import com.virgil.aft.framework.BasicActivity;
+import com.virgil.aft.util.CommUtil;
 import com.virgil.aft.util.LogUtil;
 
 
@@ -37,12 +44,12 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
     private ICountSerAIDL iCountSer = null;
     private Thread myThread;
     private DatagramSocket socketServer;
+    private TextView textView;
     private ServiceConnection serviceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             iCountSer = ICountSerAIDL.Stub.asInterface(service);
             ApplicationCache.getInstance().setiCountSer(iCountSer);
-
             try {
                 LogUtil.i("CountServiceAIDL Binded:getCount is " + iCountSer.getCon());
             } catch (RemoteException e) {
@@ -61,14 +68,9 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.main_button:
-                TextView textView = (TextView) this.findViewById(R.id.main_text);
-                Animation ani = AnimationUtils.loadAnimation(this, R.anim.shake);
-
-//                ani.setFillAfter(true);
-//                textView.startAnimation(ani);
-                slideview(textView, 0, 100);
-//                textView.setX(-10);
-//                textView.set
+                applyViewHeight(textView);
+                initTextViewColor(textView);
+//                slideview(textView, 0, 100);
                 break;
             case R.id.main_button2:
                 Intent in = new Intent(this, SecondActivity.class);
@@ -111,18 +113,45 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
                 R.anim.push_left_in));
         flipper.setOutAnimation(AnimationUtils.loadAnimation(this,
                 R.anim.push_left_out));
+        textView = (TextView) this.findViewById(R.id.main_text);
         this.findViewById(R.id.main_button).setOnClickListener(this);
         this.findViewById(R.id.main_button2).setOnClickListener(this);
         this.findViewById(R.id.main_button3).setOnClickListener(this);
         this.bindService(new Intent("com.virgil.aft.framework.CountService"), serviceCon, BIND_AUTO_CREATE);
 //        this.startService(new Intent(this, CountService.class));
-
         try {
             socketServer=new DatagramSocket(8001);
         } catch (SocketException e) {
             e.printStackTrace();
         }
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommUtil.showToast("U got it");
+            }
+        });
         initMyThread();
+    }
+    private static final int RED = 0xffFF8080;
+    private static final int BLUE = 0xff8080FF;
+    private void initTextViewColor(View view){
+        ValueAnimator colorAnim = ObjectAnimator.ofInt(view, "textColor", RED, BLUE);
+        colorAnim.setDuration(3000);
+        colorAnim.setEvaluator(new ArgbEvaluator());
+//        colorAnim.setRepeatCount(ValueAnimator.INFINITE);
+        colorAnim.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnim.start();
+    }
+    private void applyViewHeight(View view){
+        ValueAnimator stretchAnim2 = ObjectAnimator.ofInt(view, "height",
+                view.getHeight(), view.getHeight() + 100);
+        stretchAnim2.setDuration(2000);
+//        stretchAnim2.setRepeatCount(1);
+        stretchAnim2.setInterpolator(new DecelerateInterpolator());
+        stretchAnim2.setRepeatMode(ValueAnimator.REVERSE);
+        AnimatorSet bouncer = new AnimatorSet();
+        bouncer.play(stretchAnim2);
+        bouncer.start();
     }
 private void initMyThread(){
     myThread=new Thread(new Runnable() {
@@ -164,7 +193,7 @@ private void initMyThread(){
     @Override
     protected void onResume() {
         super.onResume();
-        if(!myThread.isAlive()){
+        if(!myThread.isAlive()&&socketServer!=null){
             if(socketServer.isClosed()){
                 Log.e("myLog","Resume thread");
                 // 定义UDP监听
@@ -190,7 +219,7 @@ private void initMyThread(){
     }
 
     public void slideview(final View view, final float p1, final float p2) {
-        TranslateAnimation animation = new TranslateAnimation(p1, p2, 0, 0);
+        TranslateAnimation animation = new TranslateAnimation(0, 0, p1, p2);
         animation.setInterpolator(new OvershootInterpolator());
         animation.setDuration(500);
         animation.setStartOffset(500);
@@ -208,10 +237,10 @@ private void initMyThread(){
                 int left = view.getLeft() + (int) (p2 - p1);
                 int top = view.getTop();
                 int width = view.getWidth();
-                int height = view.getHeight();
+                int height = (int) (p2 - p1);
                 view.clearAnimation();
-                view.setX(left);
-//                view.setY(top+height);
+//                view.setX(left);
+                view.setY(top+height);
 //                view.layout(left, top, left+width, top+height);
             }
         });

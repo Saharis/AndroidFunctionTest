@@ -1,5 +1,6 @@
 package com.virgil.aft.business.view;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,10 +8,15 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,7 +36,8 @@ public class Fragment1 extends BasicFragment {
     private EditText editText2;
     private int currentyeah = 14;
     private String changeContent = "";
-
+    SpannableString str=new SpannableString("开始服务");
+    TextAppearanceSpan taSpan;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return initView(inflater);
@@ -39,9 +46,10 @@ public class Fragment1 extends BasicFragment {
     private View initView(LayoutInflater inflater) {
         LinearLayout view = (LinearLayout) inflater.inflate(R.layout.mytest, null);
         view.setOrientation(LinearLayout.VERTICAL);
-        Context context = getActivity();
-        Button bt_ServiceStart = new Button(context);
-        bt_ServiceStart.setText("开始服务");
+        final Context context = getActivity();
+        taSpan=new TextAppearanceSpan(context,R.style.text_14_666666_sdw);
+        final Button bt_ServiceStart = new Button(context);
+        bt_ServiceStart.setText(str);
         bt_ServiceStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +67,8 @@ public class Fragment1 extends BasicFragment {
             @Override
             public void onClick(View v) {
                 CommUtil.showToast("service send start");
-                try {
+                str.setSpan(new TextAppearanceSpan(context,R.style.text_14_ff0000),0,str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                bt_ServiceStart.setText(str);                                                                           try {
                     ApplicationCache.getInstance().getiCountSer().setCon("start");
                 } catch (RemoteException e) {
                     e.printStackTrace();
@@ -73,6 +82,8 @@ public class Fragment1 extends BasicFragment {
         bt_Other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                str.setSpan(taSpan,0,str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                bt_ServiceStart.setText(str);
                 ActivityManager activityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
                 List<ActivityManager.RunningAppProcessInfo> processList = activityManager.getRunningAppProcesses();
                 StringBuilder sb=new StringBuilder();
@@ -97,9 +108,30 @@ public class Fragment1 extends BasicFragment {
         bt_Toast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Spannable spannable=null;
+                try {
+                    spannable=str;
+                    Class<?> mClass=spannable.getClass().getSuperclass();
+                    Field filed=mClass.getDeclaredField("mSpanCount");
+                    filed.setAccessible(true);
+                    int mSpans=(int)filed.get(spannable);
+                    if(mSpans>0){
+                        spannable.removeSpan(taSpan);
+                    }else{
+                        spannable.setSpan(taSpan,0,str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                bt_ServiceStart.setText(spannable);
+
                 CommUtil.showToast("Application.getFilesDir()=" + ApplicationCache.getInstance().getApplication().getFilesDir().getAbsolutePath());
             }
         });
+        bt_Toast.setText("Test");
         view.addView(bt_Other);
 
         view.addView(bt_ServiceStart);

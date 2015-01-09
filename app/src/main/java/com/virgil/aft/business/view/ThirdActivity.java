@@ -7,6 +7,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.virgil.aft.R;
@@ -24,7 +26,18 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_PROGRESS);
+
         setContentView(R.layout.third_layout);
+
+        setProgressBarVisibility(true);
+
+        final ProgressBar progressHorizontal = (ProgressBar)findViewById(R.id.progress_horizontal);
+
+        setProgress(progressHorizontal.getProgress() * 100);
+
+        setSecondaryProgress(progressHorizontal.getSecondaryProgress()* 100);
+
         ActionBar bar=getActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);

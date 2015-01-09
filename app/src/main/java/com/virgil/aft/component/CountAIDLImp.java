@@ -9,6 +9,7 @@ import com.virgil.aft.ICountSerAIDL;
  * Created by liuwujing on 14/12/15.
  */
 public class CountAIDLImp extends ICountSerAIDL.Stub{
+
     public CountAIDLImp(){
 
     }
