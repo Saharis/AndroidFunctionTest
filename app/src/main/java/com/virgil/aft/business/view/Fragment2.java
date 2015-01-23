@@ -26,7 +26,7 @@ public class Fragment2 extends BasicFragment {
         context = getActivity();
         View view=inflater.inflate(R.layout.fragment2, null);
         int size=1;
-        ArrayList<Button> btList=new ArrayList<>();
+        ArrayList<Button> btList=new ArrayList<Button>();
         while (btList.size()<size){
             Button button = new Button(context);
             btList.add(button);

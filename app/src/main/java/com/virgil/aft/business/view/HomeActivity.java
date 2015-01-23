@@ -37,6 +37,7 @@ import com.virgil.aft.core.ApplicationCache;
 import com.virgil.aft.framework.BasicActivity;
 import com.virgil.aft.util.CommUtil;
 import com.virgil.aft.util.LogUtil;
+import com.virgil.aft.util.TestDateTime;
 
 
 public class HomeActivity extends BasicActivity implements View.OnClickListener {
@@ -45,6 +46,7 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
     private Thread myThread;
     private DatagramSocket socketServer;
     private TextView textView;
+    TestDateTime rasa=new TestDateTime();
     private ServiceConnection serviceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -131,6 +133,7 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
             }
         });
         initMyThread();
+        rasa.assgined();
     }
     private static final int RED = 0xffFF8080;
     private static final int BLUE = 0xff8080FF;
@@ -193,7 +196,7 @@ private void initMyThread(){
     @Override
     protected void onResume() {
         super.onResume();
-        if(!myThread.isAlive()&&socketServer!=null){
+        if(myThread!=null&&!myThread.isAlive()&&socketServer!=null){
             if(socketServer.isClosed()){
                 Log.e("myLog","Resume thread");
                 // 定义UDP监听
@@ -261,7 +264,7 @@ private void initMyThread(){
 
     @Override
     protected void onDestroy() {
-        this.unbindService(serviceCon);
+//        this.unbindService(serviceCon);
         super.onDestroy();
     }
 }

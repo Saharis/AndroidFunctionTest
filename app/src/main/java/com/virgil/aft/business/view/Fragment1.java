@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -108,13 +109,14 @@ public class Fragment1 extends BasicFragment {
         bt_Toast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                WindowManager wm = (WindowManager)getActivity().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
                 Spannable spannable=null;
                 try {
                     spannable=str;
                     Class<?> mClass=spannable.getClass().getSuperclass();
                     Field filed=mClass.getDeclaredField("mSpanCount");
                     filed.setAccessible(true);
-                    int mSpans=(int)filed.get(spannable);
+                    int mSpans=(Integer)filed.get(spannable);
                     if(mSpans>0){
                         spannable.removeSpan(taSpan);
                     }else{
