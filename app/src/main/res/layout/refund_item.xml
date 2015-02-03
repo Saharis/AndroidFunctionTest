@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/refund_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_ing"/>
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/refund_icon"
+            android:layout_below="@id/refund_icon"
+            android:layout_alignRight="@id/refund_icon">
+        <ImageView
+                android:id="@+id/refund_line"
+                android:layout_width="2dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@color/light_blue_9"/>
+    </RelativeLayout>
+    <TextView
+            android:id="@+id/refund_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/refund_icon"
+            style="@style/text_14_666666"
+            android:layout_marginLeft="10dp"
+            android:text="退款申请已受理"/>
+    <TextView
+            android:id="@+id/refund_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/text_13_858585"
+            android:gravity="right"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/refund_desc"
+            android:text="1月4日 23:55文字超长文字超长文字超长文字超长文字超长"/>
+
+</RelativeLayout>

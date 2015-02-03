@@ -18,4 +18,20 @@
         <item name="android:textSize">14dip</item>
         <item name="android:textColor">#ff0000</item>
     </style>
+    <style name="text_14_df080c">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#df080c</item>
+    </style>
+    <style name="text_13_df080c">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#df080c</item>
+    </style>
+    <style name="text_14_666666">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+    <style name="text_13_858585">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#858585</item>
+    </style>
 </resources>

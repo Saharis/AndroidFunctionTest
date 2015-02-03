@@ -12,6 +12,7 @@ import android.widget.*;
 import com.virgil.aft.R;
 import com.virgil.aft.framework.BasicFragment;
 import com.virgil.aft.widget.Panel2;
+import com.virgil.aft.widget.PayRefundWdget;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class Fragment2 extends BasicFragment {
                 }
             });
         }
+        PayRefundWdget.initRefundWidget(getActivity(),"",null);
         return view;
     }
 
