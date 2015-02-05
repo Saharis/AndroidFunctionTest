@@ -41,12 +41,13 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
         ActionBar bar=getActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Calender>(this, "Calendar", Fragment_Calender.class)).setText("Calendar"));
         bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment1>(this,"Fragment1",Fragment1.class)).setText("Fragment1"));
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_SlideDrawer>(this,"Fragment_SlideDrawer",Fragment_SlideDrawer.class)).setText("Fragment_SlideDrawer"));
         bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment2>(this,"Fragment2",Fragment2.class)).setText("Fragment2"));
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Dialog>(this,"Fragment_Dialog",Fragment_Dialog.class)).setText("Fragment_Dialog"));
         bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment3>(this,"Fragment3",Fragment3.class)).setText("Fragment3"));
+
+        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Calender>(this, "Calendar", Fragment_Calender.class)).setText("Calendar"));
+        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_SlideDrawer>(this,"Fragment_SlideDrawer",Fragment_SlideDrawer.class)).setText("Fragment_SlideDrawer"));
+        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Dialog>(this,"Fragment_Dialog",Fragment_Dialog.class)).setText("Fragment_Dialog"));
         bar.addTab(bar.newTab().setTabListener(new TabListener<TestDialogFragment>(this,"TestDialogFragment",TestDialogFragment.class)).setText("TestDialogFragment"));
 
 //        this.findViewById(R.id.stack_button_1).setOnClickListener(this);

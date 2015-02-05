@@ -3,10 +3,14 @@ package com.virgil.aft.business.view;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.*;
 
 import com.virgil.aft.R;
@@ -35,11 +39,23 @@ public class Fragment2 extends BasicFragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getTopActivity(context);
+                    PayRefundWdget.initRefundWidget(getActivity(), "", null);
                 }
             });
+
         }
-        PayRefundWdget.initRefundWidget(getActivity(),"",null);
+        Button fragment2_button=(Button)view.findViewById(R.id.fragment2_button);
+        fragment2_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Rect rectgle= new Rect();
+                Window window= getActivity().getWindow();
+                window.getDecorView().getWindowVisibleDisplayFrame(rectgle);
+                int hight=rectgle.bottom-rectgle.top;
+                PayRefundWdget.initRefundWidget(getActivity(), "", null);
+
+            }
+        });
         return view;
     }
 

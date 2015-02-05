@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg_window"
+              android:orientation="vertical"
+              android:paddingBottom="10dp"
+              android:gravity="center">
+
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical">
+
+        <ImageButton
+                android:id="@+id/card_imgCancel"
+                android:layout_width="32dip"
+                android:layout_height="32dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="8dip"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_cancle_corner"
+                android:background="@color/transparent"/>
+
+        <TextView
+                android:id="@+id/card_title"
+                style="@style/text_18_099fde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:ellipsize="none"
+                android:text="退款进度"/>
+    </RelativeLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="@color/text_dialog_title"/>
+
+    <ScrollView
+            android:id="@+id/card_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:id="@+id/card_scroll_son"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
+
