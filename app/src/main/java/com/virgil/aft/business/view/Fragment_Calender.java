@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -30,94 +31,52 @@ public class Fragment_Calender extends BasicFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LogUtil.i("DDDDD==onCreateView:"+System.currentTimeMillis());
+
         return initView(inflater);
     }
 
+    private TextView ca_text3;
+    private TextView ca_text2;
+    boolean x2=false;
+    boolean x3=false;
     private View initView(LayoutInflater inflater) {
         RelativeLayout rootView = (RelativeLayout) inflater.inflate(R.layout.layout_calendar, null);
+        ca_text3=(TextView)rootView.findViewById(R.id.ca_text3);
+        ca_text2=(TextView)rootView.findViewById(R.id.ca_text2);
+
         Context context = getActivity();
-        if (rootView != null) {
-            EditText editText = new EditText(context);
-            watchEditTextAsIDCardInput(editText);
-            rootView.addView(editText);
-        }
+        ca_text3.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                x3=true;
+                ca_text3.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                refreshCenter();
+            }
+        });
+        ca_text2.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                x2=true;
+                ca_text2.getViewTreeObserver().removeGlobalOnLayoutListener(this);ca_text2.getLineCount();
+                refreshCenter();
+            }
+        });
+
         return rootView;
 
     }
-
-    private void watchEditTextAsIDCardInput(EditText param) {
-        final EditText editText = param;
-        if (editText != null) {
-            editText.addTextChangedListener(new TextWatcher() {
-                int mCount=-1;
-                int mBefore=-1;
-                int mStart=-1;
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    LogUtil.i("beforeTextChanged:editText=" + editText.getText().toString() + ";s=" + s + ";start=" + start + ";after=" + after + ";count=" + count);
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    mCount=count;
-                    mBefore=before;
-                    mStart=start;
-                    LogUtil.i("onTextChanged:editText=" + editText.getText().toString() + ";s=" + s + ";start=" + start + ";before=" + before + ";count=" + count);
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    int length = s.length();
-
-                    if(mCount>0){
-                        editText.removeTextChangedListener(this);
-                        editText.setText(formatIDCardInput(s, false));
-                        if((mStart+1)==length){
-                            editText.setSelection(editText.getEditableText().toString().length());
-                        }else{
-                            editText.setSelection(mStart+1);
-                        }
-                        editText.addTextChangedListener(this);
-                    } else if (mBefore > 0) {
-                        editText.removeTextChangedListener(this);
-                        editText.setText(formatIDCardInput(s, true));
-                        if(mStart==length){
-                            editText.setSelection(editText.getEditableText().toString().length());
-                        }else {
-                            editText.setSelection(mStart);
-                        }
-                        editText.addTextChangedListener(this);
-                    }
-                    LogUtil.i("afterTextChanged:editText=" + editText.getText().toString() + ";s=" + s.toString());
-                }
-            });
-
+    private void refreshCenter(){
+        if(x2&&x3) {
+            LogUtil.i("dddddd[[");
+            RelativeLayout.LayoutParams lp_t3 = (RelativeLayout.LayoutParams) ca_text3.getLayoutParams();
+            int ca_2height = ca_text2.getMeasuredHeight();
+            int ca_3height = ca_text3.getLineHeight();
+            int minus = ca_2height / 2 - ca_3height/2;
+            lp_t3.topMargin+=minus;
+            ca_text3.setLayoutParams(lp_t3);
         }
-    }
 
-    private String formatIDCardInput(CharSequence input, boolean delete) {
-        StringBuilder outPut = new StringBuilder(input.toString().replace(" ", ""));
-        if (!TextUtils.isEmpty(input)) {
-            if (delete) {
-                if (outPut.length() <= 6) {
-                    return outPut.toString();
-                }
-                if (outPut.length() > 6) {
-                    outPut.insert(6, " ");
-                }
-                if (outPut.length() > 15) {
-                    outPut.insert(15, " ");
-                }
-            } else {
-                if (outPut.length() >= 6) {
-                    outPut.insert(6, " ");
-                }
-                if (outPut.length() >= 15) {
-                    outPut.insert(15, " ");
-                }
-            }
-        }
-        return outPut.toString();
     }
 
 }

@@ -49,29 +49,31 @@ import com.virgil.aft.util.StringUtil;
 public class PayRefundWdget {
 
     private Context mContext;
-    private IOnReundCallback mOnReundCallback ;
+    private IOnReundCallback mOnReundCallback;
     private List<RefundInformationModel> mRefundInfosList;
     private int MAX_HEIGTH;
     private View rootView;
-    private int ROOT_MARGIN_LR_BOUNDS=DeviceUtil.getPixelFromDip(15);
-    private int CARD_MARGIN_LR_BOUNDS=DeviceUtil.getPixelFromDip(10);
+    private int ROOT_MARGIN_LR_BOUNDS = DeviceUtil.getPixelFromDip(15);
+    private int CARD_MARGIN_LR_BOUNDS = DeviceUtil.getPixelFromDip(10);
     private int totalCardHight;
     private int totalCardNum;
     private int watchCardNum;
+
     private PayRefundWdget(Context context, IOnReundCallback onReundCallback, List<RefundInformationModel> refundInforList) {
         this.mContext = context;
         this.mOnReundCallback = onReundCallback;
         this.mRefundInfosList = refundInforList;
         initMAXHight();
     }
-    private void initMAXHight(){
-        if(mContext instanceof Activity){
-            Rect rectgle= new Rect();
-            Window window= ((Activity)mContext).getWindow();
+
+    private void initMAXHight() {
+        if (mContext instanceof Activity) {
+            Rect rectgle = new Rect();
+            Window window = ((Activity) mContext).getWindow();
             window.getDecorView().getWindowVisibleDisplayFrame(rectgle);
-            MAX_HEIGTH=(rectgle.bottom-rectgle.top)/2;
-        }else{
-            MAX_HEIGTH=DeviceUtil.getPixelFromDip(310);
+            MAX_HEIGTH = (rectgle.bottom - rectgle.top) / 2;
+        } else {
+            MAX_HEIGTH = DeviceUtil.getPixelFromDip(310);
         }
 
     }
@@ -87,16 +89,16 @@ public class PayRefundWdget {
     }
 
     private void initView() {
-        rootView= buildRootView();
+        rootView = buildRootView();
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }else{
+                } else {
                     rootView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 }
-                LogUtil.i("REFUND=="+"rootView.getMeasuredHeight()="+rootView.getMeasuredHeight()+";MAX_HEIGTH="+MAX_HEIGTH);
+                LogUtil.i("REFUND==" + "rootView.getMeasuredHeight()=" + rootView.getMeasuredHeight() + ";MAX_HEIGTH=" + MAX_HEIGTH);
 
             }
         });
@@ -104,8 +106,8 @@ public class PayRefundWdget {
 
     private View buildRootView() {
 //        RelativeLayout root = new RelativeLayout(mContext);
-        LinearLayout root =(LinearLayout)LayoutInflater.from(mContext).inflate(R.layout.refund_card,null);
-        FrameLayout.LayoutParams lp_root = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT,Gravity.CENTER);
+        LinearLayout root = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.refund_card, null);
+        FrameLayout.LayoutParams lp_root = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
         lp_root.leftMargin = ROOT_MARGIN_LR_BOUNDS;
         lp_root.rightMargin = ROOT_MARGIN_LR_BOUNDS;
         root.setLayoutParams(lp_root);
@@ -150,34 +152,34 @@ public class PayRefundWdget {
 //        RelativeLayout.LayoutParams lp_scroll = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        lp_scroll.addRule(RelativeLayout.BELOW,blueline.getId());
 //        sonScroll = new LinearLayout(mContext);
-        sonScroll=(LinearLayout)root.findViewById(R.id.card_scroll_son);
+        sonScroll = (LinearLayout) root.findViewById(R.id.card_scroll_son);
 //        sonScroll.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams lp_sonScroll = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp_sonScroll.leftMargin=CARD_MARGIN_LR_BOUNDS;
-        lp_sonScroll.rightMargin=CARD_MARGIN_LR_BOUNDS;
+        lp_sonScroll.leftMargin = CARD_MARGIN_LR_BOUNDS;
+        lp_sonScroll.rightMargin = CARD_MARGIN_LR_BOUNDS;
 
         if (mRefundInfosList != null && mRefundInfosList.size() > 0) {
             for (int index = 0; index < mRefundInfosList.size(); index++) {
-                 final View cardView = buildBillRefundCardView(mRefundInfosList.get(index), mRefundInfosList);
+                final View cardView = buildBillRefundCardView(mRefundInfosList.get(index), mRefundInfosList);
                 if (cardView != null) {
                     totalCardNum++;
                     cardView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
-                            totalCardHight+=cardView.getMeasuredHeight();
-                            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN){
+                            totalCardHight += cardView.getMeasuredHeight();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                 cardView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                            }else{
+                            } else {
                                 cardView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                             }
                             watchCardNum++;
-                            LogUtil.i("REFUND=="+"totalCardNum="+totalCardNum+";watchCardNum="+watchCardNum+";cardView.getMeasuredHeight()="+cardView.getMeasuredHeight()+";totalCardHight"+totalCardHight+";");
-                            if(totalCardNum==watchCardNum){
+                            LogUtil.i("REFUND==" + "totalCardNum=" + totalCardNum + ";watchCardNum=" + watchCardNum + ";cardView.getMeasuredHeight()=" + cardView.getMeasuredHeight() + ";totalCardHight" + totalCardHight + ";");
+                            if (totalCardNum == watchCardNum) {
                                 fixScrollViewHight();
                             }
                         }
                     });
-                    sonScroll.addView(cardView,lp_sonScroll);
+                    sonScroll.addView(cardView, lp_sonScroll);
                 }
             }
         }
@@ -186,11 +188,12 @@ public class PayRefundWdget {
 
         return root;
     }
-    private void fixScrollViewHight(){
-        if(totalCardHight>MAX_HEIGTH){
-           ScrollView scroll=(ScrollView)rootView.findViewById(R.id.card_scroll);
-            ViewGroup.LayoutParams layoutParams=scroll.getLayoutParams();
-            layoutParams.height=MAX_HEIGTH;
+
+    private void fixScrollViewHight() {
+        if (totalCardHight > MAX_HEIGTH) {
+            ScrollView scroll = (ScrollView) rootView.findViewById(R.id.card_scroll);
+            ViewGroup.LayoutParams layoutParams = scroll.getLayoutParams();
+            layoutParams.height = MAX_HEIGTH;
             scroll.setLayoutParams(layoutParams);
 
         }
@@ -199,39 +202,51 @@ public class PayRefundWdget {
     /**
      * 构建单张卡片的视图
      *
-     * @param item             RefundInformationModel|数据
+     * @param card             RefundInformationModel|数据
      * @param mRefundInfosList List<RefundInformationModel>|全部的卡片数据，用于判断是否需要显示金额
      * @return View|构建的单张卡片的View
      */
-    private View buildBillRefundCardView(RefundInformationModel item, List<RefundInformationModel> mRefundInfosList) {
+    private View buildBillRefundCardView(RefundInformationModel card, List<RefundInformationModel> mRefundInfosList) {
         LinearLayout cardRoot = null;
-        if (item != null && mRefundInfosList != null && mRefundInfosList.size() > 0) {
+        if (card != null && mRefundInfosList != null && mRefundInfosList.size() > 0) {
             cardRoot = new LinearLayout(mContext);
             cardRoot.setOrientation(LinearLayout.VERTICAL);
-            FrameLayout.LayoutParams lp_root=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            FrameLayout.LayoutParams lp_root = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             cardRoot.setLayoutParams(lp_root);
             if (mRefundInfosList.size() > 1) {
                 TextView amout = new TextView(mContext);
-                SpannableString sp_amout = new SpannableString("金额:" + "  " + PayUtil.toDecimalString(item.amount));
+                SpannableString sp_amout = new SpannableString("金额:" + "  " + PayUtil.toDecimalString(card.amount));
                 sp_amout.setSpan(new TextAppearanceSpan(mContext, R.style.text_15_333333), 0, sp_amout.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 amout.setText(sp_amout);
-                LinearLayout.LayoutParams lp_title=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                lp_title.topMargin=DeviceUtil.getPixelFromDip(15);
+                LinearLayout.LayoutParams lp_title = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                lp_title.topMargin = DeviceUtil.getPixelFromDip(15);
                 cardRoot.addView(amout, lp_title);
             }
-            for(int index=0;index<item.refundProcessInfoList.size();index++){
-                View itemView = buildItemView(item.refundProcessInfoList.get(index), item.refundProcessInfoList);
+            for (int index = 0; index < card.refundProcessInfoList.size(); index++) {
+                RefundProcessInformationModel cardItem=card.refundProcessInfoList.get(index);
+                View itemView = buildItemView(cardItem, card.refundProcessInfoList);
                 if (itemView != null) {
-                    if(index==0){
-                        LinearLayout.LayoutParams lp_title=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                        lp_title.topMargin=DeviceUtil.getPixelFromDip(15);
+                    if (index == 0) {
+                        LinearLayout.LayoutParams lp_title = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        lp_title.topMargin = DeviceUtil.getPixelFromDip(15);
                         cardRoot.addView(itemView, lp_title);
-                    }else{
+                    } else {
                         cardRoot.addView(itemView);
+                    }
+                    Drawable lineDrawable = getItemLine(cardItem, card.refundProcessInfoList);
+
+                    if (lineDrawable != null) {
+                        ImageView line = new ImageView(mContext);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            line.setBackground(lineDrawable);
+                        } else {
+                            line.setBackgroundDrawable(lineDrawable);
+                        }
+                        cardRoot.addView(line);
                     }
                 }
             }
-            int currentIndex = mRefundInfosList.indexOf(item);
+            int currentIndex = mRefundInfosList.indexOf(card);
             if (currentIndex < (mRefundInfosList.size() - 1)) {
                 View line = new View(mContext);
                 line.setLayoutParams(new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.getPixelFromDip(1)));
@@ -258,9 +273,9 @@ public class PayRefundWdget {
             RelativeLayout root = new RelativeLayout(mContext);
 
             //声明
-            ImageView icon;
+            final ImageView icon;
             TextView line;
-            TextView desc;
+            final TextView desc;
             TextView note;
 
             //
@@ -269,11 +284,12 @@ public class PayRefundWdget {
 
 
             Drawable iconDrawable = getItemIcon(item);
-            Drawable lineDrawable = getItemLine(item, refundInfosList);
             if (iconDrawable != null) {
 //                icon = new ImageView(mContext);
                 icon = (ImageView) itemRoot.findViewById(R.id.refund_icon);
                 icon.setImageDrawable(iconDrawable);
+            } else {
+                icon = null;
             }
 
 
@@ -291,6 +307,8 @@ public class PayRefundWdget {
 //                desc=new TextView(mContext);
                 desc = (TextView) itemRoot.findViewById(R.id.refund_desc);
                 desc.setText(descSP);
+            } else {
+                desc = null;
             }
 
             if (noteSP != null) {
@@ -301,28 +319,46 @@ public class PayRefundWdget {
 
             line = (TextView) itemRoot.findViewById(R.id.refund_line);
 
-            if (lineDrawable != null) {
-                //line = new ImageView(mContext);
-                line.setBackgroundDrawable(lineDrawable);
-//                line.setImageDrawable(lineDrawable);
-//                line.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//                    @Override
-//                    public void onGlobalLayout() {
-//                        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN){
-//                            line.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//                        }else{
-//                            line.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-//                        }
-//                        RelativeLayout.LayoutParams lp_line=(RelativeLayout.LayoutParams)line.getLayoutParams();
-//                        lp_line.height=RelativeLayout.LayoutParams.MATCH_PARENT;
-//                        line.setLayoutParams(lp_line);
-//                    }
-//                });
-            } else {
-                ((View) line.getParent()).setVisibility(View.GONE);
+            if (icon != null) {
+                icon.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            icon.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        } else {
+                            icon.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        }
+                        icon.getMeasuredHeight();
+                    }
+                });
+            }
+            if (desc != null) {
+                desc.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            desc.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        } else {
+                            desc.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        }
+                        refreshHeight(icon, desc);
+                        desc.getMeasuredHeight();
+                    }
+                });
             }
         }
-               return itemRoot;
+
+        return itemRoot;
+    }
+
+    private void refreshHeight(ImageView icon, TextView desc) {
+        int iconHeight = icon.getMeasuredHeight();
+        int descHeigth = desc.getMeasuredHeight();
+        if (iconHeight != 0 && descHeigth != 0) {
+            RelativeLayout.LayoutParams lp_desc=(RelativeLayout.LayoutParams)desc.getLayoutParams();
+            lp_desc.topMargin+=(iconHeight -descHeigth)/2;
+            desc.setLayoutParams(lp_desc);
+        }
     }
 
     /**
@@ -577,7 +613,7 @@ public class PayRefundWdget {
         RefundProcessInformationModel refundInfo3_3 = new RefundProcessInformationModel();
         refundInfo3_3.processStatus = 8;
         refundInfo3_3.processName = "退款成功";
-        refundInfo3_3.processDesc = "预计到账需要15个工作日";
+        refundInfo3_3.processDesc = "预计到账需要15个工作日预计到账需要15个工作日预计到账需要15个工作日";
 //        refundInfo3_3.processOpTime = "20160901111111";
         refundInfo3.refundProcessInfoList.add(refundInfo3_3);
 

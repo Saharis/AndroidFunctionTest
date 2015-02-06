@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/refund_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/text_13_858585"
+            android:gravity="center|right"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/refund_desc"
+            android:text="1月4日 23:55 test Americanadada Americanadada Americanadada Americanadada"/>
+
+    <TextView
+            android:id="@+id/refund_note2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/text_13_858585"
+            android:gravity="center|right"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+
+            android:layout_toRightOf="@id/refund_desc"
+            android:layout_below="@id/refund_note"
+            android:text="ricanadada Americanadada Americanadada Americanadada"/>
+    <TextView
+            android:id="@+id/refund_note3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/text_13_858585"
+            android:gravity="center|right"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/refund_desc"
+            android:layout_below="@id/refund_note2"
+            android:text="est Americanadada Americanadada Americanadada Americanadada"/>
+
+    <ImageView
+            android:id="@+id/refund_icon"
+            android:layout_width="19dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_ing"/>
+    <TextView
+            android:id="@+id/refund_line"
+            android:layout_width="2dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="9dp"
+            android:layout_below="@id/refund_icon"
+            android:background="@color/light_blue_9"/>
+    <ImageView
+            android:id="@+id/refund_icon2"
+            android:layout_width="19dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/refund_line"
+            android:src="@drawable/refund_circle"/>
+    <TextView
+            android:id="@+id/refund_line2"
+            android:layout_width="2dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="9dp"
+            android:layout_below="@id/refund_icon2"
+            android:background="@color/light_blue_9"/>
+    <ImageView
+            android:id="@+id/refund_icon3"
+            android:layout_width="19dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/refund_line2"
+            android:src="@drawable/ico_ing"/>
+    <TextView
+            android:id="@+id/refund_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/text_14_666666"
+            android:includeFontPadding="false"
+            android:layout_toRightOf="@id/refund_icon"
+            android:gravity="center"
+            android:layout_alignBaseline="@id/refund_note"
+            android:layout_marginLeft="10dp"
+            android:text="退款申请已受理"/>
+    <TextView
+            android:id="@+id/refund_desc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/text_14_666666"
+            android:includeFontPadding="false"
+            android:layout_below="@id/refund_desc"
+            android:layout_alignLeft="@id/refund_desc"
+            android:layout_alignBaseline="@id/refund_note2"
+
+            android:gravity="center"
+            android:text="退款申请已受理"/>
+    <TextView
+            android:id="@+id/refund_desc3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/refund_icon"
+            style="@style/text_14_666666"
+            android:includeFontPadding="false"
+            android:layout_below="@id/refund_desc2"
+            android:layout_alignLeft="@id/refund_desc"
+            android:layout_alignBaseline="@id/refund_note3"
+
+            android:gravity="center"
+            android:text="退款申请已受理"/>
+
+
+</RelativeLayout>

@@ -3,10 +3,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-    
+
     <ImageView
             android:id="@+id/refund_icon"
-            android:layout_width="23dp"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ico_ing"/>
 
@@ -15,8 +15,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/refund_icon"
-            android:layout_alignTop="@id/refund_icon"
-            android:layout_alignBottom="@id/refund_icon"
             style="@style/text_14_666666"
             android:includeFontPadding="false"
             android:gravity="center"
@@ -28,11 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             style="@style/text_13_858585"
-
-            android:ellipsize="none"
             android:gravity="center|right"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/refund_desc"
+            android:layout_alignBaseline="@id/refund_desc"
             android:text="1月4日 23:55 test Americanadada Americanadada Americanadada Americanadada"/>
     <TextView
             android:layout_width="10dp"

@@ -5,4 +5,47 @@
         android:layout_height="wrap_content"
         android:padding="20dip">
 
+
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp">
+        <RelativeLayout
+                android:layout_width="160dp"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/ca_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="欢快的小鸭子，"/>
+            <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ico_finish"
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@id/ca_text"
+                    android:id="@+id/cal_img"/>
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/refund_circle"
+                    android:layout_below="@+id/cal_img"
+                    android:id="@+id/cal_img2"/>
+            <TextView
+                    android:id="@+id/ca_text2"
+                    android:layout_width="80dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cal_img2"
+                    android:textSize="40dp"
+                    android:text="二鸭"/>
+            <TextView
+                    android:id="@+id/ca_text3"
+                    android:layout_width="wrap_content"
+                    android:layout_toRightOf="@id/ca_text2"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cal_img2"
+                    android:includeFontPadding="false"
+                    android:text="第三只欢快的小鸭子，第四只欢快的小鸭子，"/>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
