@@ -15,6 +15,7 @@
 
     <color name="common_bg_tag_photo">#ff4444</color> <!-- red, tag bg on photo -->
 
+    <color name="color_ffe0e0e0">#ffe0e0e0</color>
 
     <!-- common color end -->
 
@@ -47,6 +48,7 @@
     <color name="light_gray">#9b9b9b</color>
     <color name="light_gray1">#99999999</color>
     <color name="light_gray4">#c4c3c3</color>
+    <color name="light_gray5">#e0e0e0</color>
     <color name="list_dark">#001023</color>
     <color name="list_light">#203249</color>
     <color name="list_arrive">#00ff8a</color>

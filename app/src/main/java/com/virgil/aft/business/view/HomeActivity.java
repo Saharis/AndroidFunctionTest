@@ -119,22 +119,33 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         this.findViewById(R.id.main_button).setOnClickListener(this);
         this.findViewById(R.id.main_button2).setOnClickListener(this);
         this.findViewById(R.id.main_button3).setOnClickListener(this);
-        this.bindService(new Intent("com.virgil.aft.framework.CountService"), serviceCon, BIND_AUTO_CREATE);
-//        this.startService(new Intent(this, CountService.class));
-        try {
-            socketServer=new DatagramSocket(8001);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CommUtil.showToast("U got it");
             }
         });
-        initMyThread();
         rasa.assgined();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent mIntent=new Intent();
+        mIntent.setAction("com.virgil.aft.framework.CountService");
+        mIntent.setPackage(getPackageName());
+        this.bindService(mIntent, serviceCon, BIND_AUTO_CREATE);
+//        this.startService(new Intent(this, CountService.class));
+        try {
+            socketServer=new DatagramSocket(8001);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        initMyThread();
+
+    }
+
     private static final int RED = 0xffFF8080;
     private static final int BLUE = 0xff8080FF;
     private void initTextViewColor(View view){

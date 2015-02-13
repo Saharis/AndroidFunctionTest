@@ -1,5 +1,7 @@
 package com.virgil.aft.util;
 
+import android.text.TextUtils;
+
 /**
  * Created by liuwujing on 15/2/3.
  */
@@ -7,7 +9,7 @@ public class StringUtil {
     public static boolean isDateTimeEmpty(String dateTime) {
         final String emptyDate = "00010101";// 8位空日期
         final String emptyDateTime = "00010101000000";// 14位空日期
-        if (StringUtil.emptyOrNull(dateTime)) {
+        if (TextUtils.isEmpty(dateTime)) {
             return true;
         }
         // 14位时间
@@ -20,10 +22,6 @@ public class StringUtil {
         }
         return false;
     }
-    public static boolean emptyOrNull(String str) {
-        return str == null || str.length() == 0;
-    }
-
 
     /**
      * 将String转换为int，异常时，返回传入的{@code #defaultValue}
@@ -45,5 +43,22 @@ public class StringUtil {
 
     public static int toInt(String s) {
         return toInt(s,-1);
+    }
+
+    public static String getFormatCurrency(String currency) {
+        if (currency == null || currency.length() == 0) {
+            return "";
+        }
+
+        if ("RMB".equalsIgnoreCase(currency) || "CNY".equalsIgnoreCase(currency)) {
+            return "￥";
+        } /*
+		 * else if ("USD".equalsIgnoreCase(currency)) {
+		 * return "$";
+		 * }
+		 */
+        else {
+            return currency;
+        }
     }
 }

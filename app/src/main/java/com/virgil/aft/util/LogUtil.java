@@ -1,5 +1,9 @@
 package com.virgil.aft.util;
 
+import android.widget.Toast;
+
+import com.virgil.aft.core.ApplicationCache;
+
 /**
  * Created by liuwj on 2014/6/23.
  */
@@ -174,5 +178,8 @@ public class LogUtil {
     private static String buildMessage(String msg) {
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
         return new StringBuilder().append(msg).append("	#").append(caller.getClassName()).append(".").append(caller.getMethodName()).append("()|:").append(caller.getLineNumber()).toString();
+    }
+    public static void  showToast(String msg){
+        Toast.makeText(ApplicationCache.getInstance().getApplication(),msg,Toast.LENGTH_SHORT).show();
     }
 }

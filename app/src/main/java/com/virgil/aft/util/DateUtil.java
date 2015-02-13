@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import android.text.TextUtils;
+
 /**
  * Created by liuwujing on 15/2/3.
  */
@@ -27,7 +29,7 @@ public class DateUtil {
     }
     public static Calendar getCalendarByDateTimeStr(String dateStr)
     {
-        if (StringUtil.emptyOrNull(dateStr) || dateStr.length() < 8) {
+        if (TextUtils.isEmpty(dateStr) || dateStr.length() < 8) {
             return null;
         }
         while (dateStr.length() < 14)
