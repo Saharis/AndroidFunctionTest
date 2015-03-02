@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import android.app.Application;
 
-import com.virgil.aft.ICountSerAIDL;
+import com.virgil.aft.IAFTSerAIDL;
+import com.virgil.aft.business.view.HomeActivity;
 import com.virgil.aft.framework.BasicActivity;
 
 /**
@@ -15,8 +16,8 @@ import com.virgil.aft.framework.BasicActivity;
 public class ApplicationCache {
     public ArrayList<BasicActivity> activityStack = new ArrayList<BasicActivity>();
     private BaseApplication application;
-    private ICountSerAIDL iCountSer = null;
-
+    private IAFTSerAIDL iCountSer = null;
+    public HomeActivity homeActivity;
     private static ApplicationCache instance = null;
 
     public static ApplicationCache getInstance() {
@@ -37,11 +38,11 @@ public class ApplicationCache {
         this.application = application;
     }
 
-    public ICountSerAIDL getiCountSer() {
+    public IAFTSerAIDL getiCountSer() {
         return iCountSer;
     }
 
-    public void setiCountSer(ICountSerAIDL iCountSer) {
+    public void setiCountSer(IAFTSerAIDL iCountSer) {
         this.iCountSer = iCountSer;
     }
 }

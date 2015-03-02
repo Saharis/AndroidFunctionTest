@@ -5,18 +5,21 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import com.virgil.aft.ICountSerAIDL;
+import com.virgil.aft.IAFTSerAIDL;
+import com.virgil.aft.component.TaskConstants;
+import com.virgil.aft.core.ApplicationCache;
 import com.virgil.aft.util.LogUtil;
 
 /**
+ * CountService
  * Created by liuwujing on 14/11/6.
  */
-public class CountService extends Service {
+public class AFTService extends Service {
     private volatile boolean stopCounting = true;
     private int count = 0;
-    private ICountSerAIDL.Stub servBinder = new CountStub();
+    private IAFTSerAIDL.Stub servBinder = new CountStub();
 
-    public class CountStub extends ICountSerAIDL.Stub {
+    public class CountStub extends IAFTSerAIDL.Stub {
         public CountStub() {
 
         }
@@ -32,6 +35,17 @@ public class CountService extends Service {
                 stopCounting = true;
             } else {
                 stopCounting = false;
+            }
+        }
+
+        @Override
+        public void excute(int type) throws RemoteException {
+            switch (type) {
+                case TaskConstants.AFTSERVICE_BUSINESS_TYPE_EXCHANGE_ACTIVITY:
+                    ApplicationCache.getInstance().homeActivity.jump2ThirdActivity();
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -57,7 +71,7 @@ public class CountService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        LogUtil.i("intent.getAction()="+intent.getAction()+"=");
+        LogUtil.i("intent.getAction()=" + intent.getAction() + "=");
         return servBinder;
     }
 

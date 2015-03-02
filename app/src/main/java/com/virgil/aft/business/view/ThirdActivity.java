@@ -2,15 +2,14 @@ package com.virgil.aft.business.view;
 
 
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.virgil.aft.R;
 import com.virgil.aft.framework.BasicActivity;
 import com.virgil.aft.framework.BasicFragment;
@@ -37,18 +36,18 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
         setProgress(progressHorizontal.getProgress() * 100);
 
         setSecondaryProgress(progressHorizontal.getSecondaryProgress()* 100);
-
-        ActionBar bar=getActionBar();
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment1>(this,"Fragment1",Fragment1.class)).setText("Fragment1"));
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment2>(this,"Fragment2",Fragment2.class)).setText("Fragment2"));
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment3>(this,"Fragment3",Fragment3.class)).setText("Fragment3"));
-
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Calender>(this, "Calendar", Fragment_Calender.class)).setText("Calendar"));
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_SlideDrawer>(this,"Fragment_SlideDrawer",Fragment_SlideDrawer.class)).setText("Fragment_SlideDrawer"));
-        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Dialog>(this,"Fragment_Dialog",Fragment_Dialog.class)).setText("Fragment_Dialog"));
-        bar.addTab(bar.newTab().setTabListener(new TabListener<TestDialogFragment>(this,"TestDialogFragment",TestDialogFragment.class)).setText("TestDialogFragment"));
+        excuteFragment(new Fragment2());
+//        ActionBar bar=getActionBar();
+//        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//        bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
+//        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment1>(this,"Fragment1",Fragment1.class)).setText("Fragment1"));
+//        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment2>(this,"Fragment2",Fragment2.class)).setText("Fragment2"));
+//        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment3>(this,"Fragment3",Fragment3.class)).setText("Fragment3"));
+//
+//        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Calender>(this, "Calendar", Fragment_Calender.class)).setText("Calendar"));
+//        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_SlideDrawer>(this,"Fragment_SlideDrawer",Fragment_SlideDrawer.class)).setText("Fragment_SlideDrawer"));
+//        bar.addTab(bar.newTab().setTabListener(new TabListener<Fragment_Dialog>(this,"Fragment_Dialog",Fragment_Dialog.class)).setText("Fragment_Dialog"));
+//        bar.addTab(bar.newTab().setTabListener(new TabListener<TestDialogFragment>(this,"TestDialogFragment",TestDialogFragment.class)).setText("TestDialogFragment"));
 
 //        this.findViewById(R.id.stack_button_1).setOnClickListener(this);
 //        this.findViewById(R.id.stack_button_2).setOnClickListener(this);
@@ -60,7 +59,7 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
 
     }
     private void excuteFragment(Fragment fragment){
-        FragmentTransaction ft=getFragmentManager().beginTransaction();
+        FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
         if(fragment!=null){
             if(!fragment.isDetached()){
 
@@ -71,8 +70,8 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
         ft.addToBackStack(null);
         ft.commit();
     }
-    private void jumpToFragment(Fragment fragment,String tag){
-        FragmentManager fgManager=getFragmentManager();
+    private void jumpToFragment(BasicFragment fragment,String tag){
+        FragmentManager fgManager=getSupportFragmentManager();
         FragmentTransaction ft=fgManager.beginTransaction();
         BasicFragment added=(BasicFragment)fgManager.findFragmentByTag(tag);
         if(added!=null){
@@ -96,43 +95,5 @@ public class ThirdActivity extends BasicActivity implements View.OnClickListener
 
     }
 
-    public static class TabListener<T extends Fragment> implements ActionBar.TabListener{
-        private final BasicActivity mActivity;
-        private final String mtag;
-        private final Class<T> mclz;
-        private Fragment mFagment;
-        public TabListener(BasicActivity mActivity,String tag,Class<T> clz) {
-            this.mActivity=mActivity;
-            this.mtag=tag;
-            this.mclz=clz;
-            mFagment=(Fragment)mActivity.getFragmentManager().findFragmentByTag(mtag);
-            if(mFagment!=null&&!mFagment.isDetached()){
-                FragmentTransaction ft=mActivity.getFragmentManager().beginTransaction();
-                ft.detach(mFagment);
-                ft.commit();
-            }
-        }
 
-        @Override
-        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-            if(mFagment==null){
-                mFagment= (Fragment)Fragment.instantiate(mActivity,mclz.getName());
-                ft.add(R.id.fragment_to_replace,mFagment,mtag);
-            }else{
-                ft.attach(mFagment);
-            }
-        }
-
-        @Override
-        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-            if (mFagment != null) {
-                ft.detach(mFagment);
-            }
-        }
-
-        @Override
-        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-            Toast.makeText(mActivity,"You reselect this Tab",Toast.LENGTH_SHORT).show();
-        }
-    }
 }

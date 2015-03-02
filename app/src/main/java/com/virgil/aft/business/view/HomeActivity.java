@@ -9,7 +9,6 @@ import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -31,7 +30,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.virgil.aft.ICountSerAIDL;
+import com.virgil.aft.IAFTSerAIDL;
 import com.virgil.aft.R;
 import com.virgil.aft.core.ApplicationCache;
 import com.virgil.aft.framework.BasicActivity;
@@ -42,7 +41,7 @@ import com.virgil.aft.util.TestDateTime;
 
 public class HomeActivity extends BasicActivity implements View.OnClickListener {
     private TextView tx_2;
-    private ICountSerAIDL iCountSer = null;
+    private IAFTSerAIDL iCountSer = null;
     private Thread myThread;
     private DatagramSocket socketServer;
     private TextView textView;
@@ -50,7 +49,7 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
     private ServiceConnection serviceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            iCountSer = ICountSerAIDL.Stub.asInterface(service);
+            iCountSer = IAFTSerAIDL.Stub.asInterface(service);
             ApplicationCache.getInstance().setiCountSer(iCountSer);
             try {
                 LogUtil.i("CountServiceAIDL Binded:getCount is " + iCountSer.getCon());
@@ -86,6 +85,11 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         }
     }
 
+    public void jump2ThirdActivity(){
+        Intent in2 = new Intent(this, SecondActivity.class);
+//        in2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(in2);
+    }
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -137,13 +141,15 @@ public class HomeActivity extends BasicActivity implements View.OnClickListener 
         mIntent.setPackage(getPackageName());
         this.bindService(mIntent, serviceCon, BIND_AUTO_CREATE);
 //        this.startService(new Intent(this, CountService.class));
-        try {
-            socketServer=new DatagramSocket(8001);
-        } catch (SocketException e) {
-            e.printStackTrace();
+        if(socketServer==null) {
+            try {
+                socketServer = new DatagramSocket(8001);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
         }
         initMyThread();
-
+        ApplicationCache.getInstance().homeActivity=this;
     }
 
     private static final int RED = 0xffFF8080;
@@ -221,10 +227,10 @@ private void initMyThread(){
             }
             initMyThread();
             myThread.start();
+
             //mReceiveThread.run();
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -275,7 +281,9 @@ private void initMyThread(){
 
     @Override
     protected void onDestroy() {
-//        this.unbindService(serviceCon);
+        if(serviceCon!=null) {
+            this.unbindService(serviceCon);
+        }
         super.onDestroy();
     }
 }

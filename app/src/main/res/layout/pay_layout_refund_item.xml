@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/pay_refund_ico_finish_fixed"/>
+                    android:src="@drawable/pay_refund_ico_finish"/>
             <ImageView
                     android:id="@+id/line_top"
                     android:layout_width="1dp"
