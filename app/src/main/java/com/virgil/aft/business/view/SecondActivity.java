@@ -50,6 +50,7 @@ public class SecondActivity extends BasicActivity {
             @Override
             public void onClick(View v) {
                 Uri url=Uri.parse("aft://virgil.aft/second?name=1&value=2");
+                String[] arr= getResources().getStringArray(R.array.wpg_services);
             }
         });
     }

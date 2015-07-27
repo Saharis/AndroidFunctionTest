@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import com.virgil.aft.framework.BasicFragment;
 import com.virgil.aft.util.DeviceUtil;
 import com.virgil.aft.widget.PayRefundWidget;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,11 +54,17 @@ public class Fragment2 extends BasicFragment {
         fragment2_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Rect rectgle = new Rect();
-                Window window = getActivity().getWindow();
-                window.getDecorView().getWindowVisibleDisplayFrame(rectgle);
-                int hight = rectgle.bottom - rectgle.top;
-                PayRefundWidget.initRefundWidget(getActivity(), "", null);
+                ConnectivityManager connManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                NetworkInfo info = connManager.getActiveNetworkInfo();
+                info.getTypeName();info.getSubtypeName()info.getSubtype()
+                TelephonyManager telephonyManager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+                String IMSI = null;
+                int networkType = 0;
+                if (telephonyManager != null) {
+                    IMSI = telephonyManager.getSubscriberId();
+                    networkType = telephonyManager.getNetworkType();
+                }
 
             }
         });

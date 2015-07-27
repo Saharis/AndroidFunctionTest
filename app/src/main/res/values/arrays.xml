@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="wpg_services">
+        <item>31000101</item>//支付方式查询
+        <item>31000301</item>//支付提交
+        <item>31000302</item>//支付提交(H5)
+        <item>31000303</item>//实时支付提交
+        <item>31000401</item>//支付短信验证码请求接口
+        <item>31000501</item>//更新卡电话
+        <item>31000601</item>//使用过的信用卡列表
+        <item>31000701</item>//json格式的服务契约映射(管道)
+        <item>31000901</item>//获取继续支付信息
+        <item>31001001</item>//获取用于第三方支付的签名信息
+        <item>31001002</item>//根据SaveID获取用于第三方支付的签名信息
+        <item>31001101</item>//查询其他支付信息
+        <item>31001201</item>//查询礼品卡信息
+        <item>31001301</item>//根据卡号查询卡种信息（5.8新增）
+        <item>90101001</item>//常用信用卡列表查询(支付1.0)
+        <item>90101101</item>//信用卡验证(只用于Windows Phone)
+        <item>90101102</item>//信用卡校验V2(升级服务，支持TCP协议)
+        <item>90200401</item>//礼品卡密码验证
+        <item>95004801</item>//交易账户信息查询
+        <item>31001501</item>//获取用户账号信息
+        <item>31001601</item>//发送手机验证码
+        <item>31001701</item>//验证手机验证码
+        <item>31001801</item>//开通银联后台业务
+        <item>32009507</item>//银行增量服务
+        <item>31002001</item>//快捷支付查询绑卡服务
+        <item>31002002</item>//快捷支付支付提交
+        <item>31001901</item>//快捷支付支付提交
+    </string-array>
+</resources>
